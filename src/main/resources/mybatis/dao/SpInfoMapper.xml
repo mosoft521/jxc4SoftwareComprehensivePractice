@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gmail.mosoft521.cp.jxc.dao.SpInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="spname" jdbcType="VARCHAR" property="spname" />
+    <result column="jc" jdbcType="VARCHAR" property="jc" />
+    <result column="cd" jdbcType="VARCHAR" property="cd" />
+    <result column="dw" jdbcType="VARCHAR" property="dw" />
+    <result column="gg" jdbcType="VARCHAR" property="gg" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+    <result column="ph" jdbcType="VARCHAR" property="ph" />
+    <result column="pzwh" jdbcType="VARCHAR" property="pzwh" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="gysname" jdbcType="VARCHAR" property="gysname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, spname, jc, cd, dw, gg, bz, ph, pzwh, memo, gysname
+  </sql>
+  <select id="selectByExample" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_spinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_spinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_spinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfoExample">
+    delete from tb_spinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_spinfo (id, spname, jc, 
+      cd, dw, gg, bz, 
+      ph, pzwh, memo, gysname
+      )
+    values (#{id,jdbcType=VARCHAR}, #{spname,jdbcType=VARCHAR}, #{jc,jdbcType=VARCHAR}, 
+      #{cd,jdbcType=VARCHAR}, #{dw,jdbcType=VARCHAR}, #{gg,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, 
+      #{ph,jdbcType=VARCHAR}, #{pzwh,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{gysname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_spinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="spname != null">
+        spname,
+      </if>
+      <if test="jc != null">
+        jc,
+      </if>
+      <if test="cd != null">
+        cd,
+      </if>
+      <if test="dw != null">
+        dw,
+      </if>
+      <if test="gg != null">
+        gg,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+      <if test="ph != null">
+        ph,
+      </if>
+      <if test="pzwh != null">
+        pzwh,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="gysname != null">
+        gysname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="spname != null">
+        #{spname,jdbcType=VARCHAR},
+      </if>
+      <if test="jc != null">
+        #{jc,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null">
+        #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="dw != null">
+        #{dw,jdbcType=VARCHAR},
+      </if>
+      <if test="gg != null">
+        #{gg,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null">
+        #{ph,jdbcType=VARCHAR},
+      </if>
+      <if test="pzwh != null">
+        #{pzwh,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="gysname != null">
+        #{gysname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfoExample" resultType="java.lang.Long">
+    select count(*) from tb_spinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_spinfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spname != null">
+        spname = #{record.spname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jc != null">
+        jc = #{record.jc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cd != null">
+        cd = #{record.cd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dw != null">
+        dw = #{record.dw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gg != null">
+        gg = #{record.gg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bz != null">
+        bz = #{record.bz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ph != null">
+        ph = #{record.ph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pzwh != null">
+        pzwh = #{record.pzwh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null">
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gysname != null">
+        gysname = #{record.gysname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_spinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      spname = #{record.spname,jdbcType=VARCHAR},
+      jc = #{record.jc,jdbcType=VARCHAR},
+      cd = #{record.cd,jdbcType=VARCHAR},
+      dw = #{record.dw,jdbcType=VARCHAR},
+      gg = #{record.gg,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      ph = #{record.ph,jdbcType=VARCHAR},
+      pzwh = #{record.pzwh,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      gysname = #{record.gysname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
+    update tb_spinfo
+    <set>
+      <if test="spname != null">
+        spname = #{spname,jdbcType=VARCHAR},
+      </if>
+      <if test="jc != null">
+        jc = #{jc,jdbcType=VARCHAR},
+      </if>
+      <if test="cd != null">
+        cd = #{cd,jdbcType=VARCHAR},
+      </if>
+      <if test="dw != null">
+        dw = #{dw,jdbcType=VARCHAR},
+      </if>
+      <if test="gg != null">
+        gg = #{gg,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null">
+        ph = #{ph,jdbcType=VARCHAR},
+      </if>
+      <if test="pzwh != null">
+        pzwh = #{pzwh,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="gysname != null">
+        gysname = #{gysname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
+    update tb_spinfo
+    set spname = #{spname,jdbcType=VARCHAR},
+      jc = #{jc,jdbcType=VARCHAR},
+      cd = #{cd,jdbcType=VARCHAR},
+      dw = #{dw,jdbcType=VARCHAR},
+      gg = #{gg,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      ph = #{ph,jdbcType=VARCHAR},
+      pzwh = #{pzwh,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      gysname = #{gysname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

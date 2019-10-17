@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gmail.mosoft521.cp.jxc.dao.KucunMapper">
+  <resultMap id="BaseResultMap" type="com.gmail.mosoft521.cp.jxc.entity.Kucun">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="spname" jdbcType="VARCHAR" property="spname" />
+    <result column="jc" jdbcType="VARCHAR" property="jc" />
+    <result column="gg" jdbcType="VARCHAR" property="gg" />
+    <result column="bz" jdbcType="VARCHAR" property="bz" />
+    <result column="dw" jdbcType="VARCHAR" property="dw" />
+    <result column="dj" jdbcType="REAL" property="dj" />
+    <result column="kcsl" jdbcType="REAL" property="kcsl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, spname, jc, gg, bz, dw, dj, kcsl
+  </sql>
+  <select id="selectByExample" parameterType="com.gmail.mosoft521.cp.jxc.entity.KucunExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_kucun
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_kucun
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_kucun
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gmail.mosoft521.cp.jxc.entity.KucunExample">
+    delete from tb_kucun
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.Kucun">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_kucun (id, spname, jc, 
+      gg, bz, dw, dj, 
+      kcsl)
+    values (#{id,jdbcType=VARCHAR}, #{spname,jdbcType=VARCHAR}, #{jc,jdbcType=VARCHAR}, 
+      #{gg,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{dw,jdbcType=VARCHAR}, #{dj,jdbcType=REAL}, 
+      #{kcsl,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.Kucun">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_kucun
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      id,
+      <if test="spname != null">
+        spname,
+      </if>
+      <if test="jc != null">
+        jc,
+      </if>
+      <if test="gg != null">
+        gg,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+      <if test="dw != null">
+        dw,
+      </if>
+      <if test="dj != null">
+        dj,
+      </if>
+      <if test="kcsl != null">
+        kcsl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=VARCHAR},
+      <if test="spname != null">
+        #{spname,jdbcType=VARCHAR},
+      </if>
+      <if test="jc != null">
+        #{jc,jdbcType=VARCHAR},
+      </if>
+      <if test="gg != null">
+        #{gg,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="dw != null">
+        #{dw,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null">
+        #{dj,jdbcType=REAL},
+      </if>
+      <if test="kcsl != null">
+        #{kcsl,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gmail.mosoft521.cp.jxc.entity.KucunExample" resultType="java.lang.Long">
+    select count(*) from tb_kucun
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_kucun
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spname != null">
+        spname = #{record.spname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jc != null">
+        jc = #{record.jc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gg != null">
+        gg = #{record.gg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bz != null">
+        bz = #{record.bz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dw != null">
+        dw = #{record.dw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dj != null">
+        dj = #{record.dj,jdbcType=REAL},
+      </if>
+      <if test="record.kcsl != null">
+        kcsl = #{record.kcsl,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_kucun
+    set id = #{record.id,jdbcType=VARCHAR},
+      spname = #{record.spname,jdbcType=VARCHAR},
+      jc = #{record.jc,jdbcType=VARCHAR},
+      gg = #{record.gg,jdbcType=VARCHAR},
+      bz = #{record.bz,jdbcType=VARCHAR},
+      dw = #{record.dw,jdbcType=VARCHAR},
+      dj = #{record.dj,jdbcType=REAL},
+      kcsl = #{record.kcsl,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.Kucun">
+    update tb_kucun
+    <set>
+      <if test="spname != null">
+        spname = #{spname,jdbcType=VARCHAR},
+      </if>
+      <if test="jc != null">
+        jc = #{jc,jdbcType=VARCHAR},
+      </if>
+      <if test="gg != null">
+        gg = #{gg,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="dw != null">
+        dw = #{dw,jdbcType=VARCHAR},
+      </if>
+      <if test="dj != null">
+        dj = #{dj,jdbcType=REAL},
+      </if>
+      <if test="kcsl != null">
+        kcsl = #{kcsl,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gmail.mosoft521.cp.jxc.entity.Kucun">
+    update tb_kucun
+    set spname = #{spname,jdbcType=VARCHAR},
+      jc = #{jc,jdbcType=VARCHAR},
+      gg = #{gg,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
+      dw = #{dw,jdbcType=VARCHAR},
+      dj = #{dj,jdbcType=REAL},
+      kcsl = #{kcsl,jdbcType=REAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

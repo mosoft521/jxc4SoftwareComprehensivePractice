@@ -68,8 +68,44 @@
         <!--t_jxc, t_jxc_in_record, t_jxc_sale_record, t_jxc_type, t_in_record, t_publisher, t_sale_record, t_user-->
         <!--        <table schema="" tableName="common_xzqh_tree_path" domainObjectName="CommonXzqhTreePath">-->
         <!--        </table>-->
-        <table schema="" tableName="tb_userlist" domainObjectName="User">
+        <table schema="" tableName="tb_gysinfo" domainObjectName="GysInfo">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table schema="" tableName="tb_ruku_main" domainObjectName="Ruku">
+            <generatedKey column="rkID" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="tb_ruku_detail" domainObjectName="RukuDetail">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="tb_spinfo" domainObjectName="SpInfo">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="tb_khinfo" domainObjectName="KhInfo">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="tb_kucun" domainObjectName="Kucun">
+            <generatedKey column="id" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="tb_userlist" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table schema="" tableName="tb_jsr" domainObjectName="Jsr">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table schema="" tableName="tb_sell_main" domainObjectName="Sell">
+            <generatedKey column="sellID" sqlStatement="MySql"/>
+        </table>
+
+        <table schema="" tableName="tb_sell_detail" domainObjectName="SellDetail">
+            <generatedKey column="ID" sqlStatement="MySql"/>
         </table>
 
     </context>
