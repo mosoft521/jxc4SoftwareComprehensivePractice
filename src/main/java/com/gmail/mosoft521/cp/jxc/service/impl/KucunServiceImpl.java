@@ -36,11 +36,11 @@ public class KucunServiceImpl implements KucunService {
             KucunExample example = new KucunExample();
             KucunExample.Criteria criteria = example.createCriteria();
             criteria.andSpnameEqualTo(item.getName());
-            List<Kucun> gysInfoList = kucunMapper.selectByExample(example);
-            if (gysInfoList.isEmpty()) {
+            List<Kucun> kucunList = kucunMapper.selectByExample(example);
+            if (kucunList.isEmpty()) {
                 return null;
             } else {
-                return gysInfoList.get(0);
+                return kucunList.get(0);
             }
         }
     }

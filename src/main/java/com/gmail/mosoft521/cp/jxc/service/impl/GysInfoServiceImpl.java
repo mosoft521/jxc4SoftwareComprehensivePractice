@@ -3,7 +3,9 @@ package com.gmail.mosoft521.cp.jxc.service.impl;
 import com.gmail.mosoft521.cp.jxc.dao.GysInfoMapper;
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.entity.GysInfoExample;
+import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,20 +25,19 @@ public class GysInfoServiceImpl implements GysInfoService {
     }
 
     @Override
-    public GysInfo getGysInfoById(String id) {
-        return gysInfoMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public GysInfo getGysInfoByName(String name) {
-        GysInfoExample example = new GysInfoExample();
-        GysInfoExample.Criteria criteria = example.createCriteria();
-        criteria.andNameEqualTo(name);
-        List<GysInfo> gysInfoList = gysInfoMapper.selectByExample(example);
-        if (gysInfoList.isEmpty()) {
-            return null;
+    public GysInfo getGysInfo(Item item) {
+        if (StringUtils.isNotBlank(item.getId())) {
+            return gysInfoMapper.selectByPrimaryKey(item.getId());
         } else {
-            return gysInfoList.get(0);
+            GysInfoExample example = new GysInfoExample();
+            GysInfoExample.Criteria criteria = example.createCriteria();
+            criteria.andNameEqualTo(item.getName());
+            List<GysInfo> gysInfoList = gysInfoMapper.selectByExample(example);
+            if (gysInfoList.isEmpty()) {
+                return null;
+            } else {
+                return gysInfoList.get(0);
+            }
         }
     }
 }
