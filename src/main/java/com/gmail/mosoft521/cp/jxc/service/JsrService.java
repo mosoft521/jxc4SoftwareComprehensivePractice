@@ -10,4 +10,8 @@ public interface JsrService {
     int deleteByPrimaryKey(Integer id);
 
     int reduceEnableById(Integer id);
+
+    Jsr getJsr(String nameStr, String ageStr);
+
+    int addJsr(Jsr jsr);
 }

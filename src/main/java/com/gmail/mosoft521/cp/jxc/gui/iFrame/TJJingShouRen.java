@@ -1,6 +1,7 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.Jsr;
+import com.gmail.mosoft521.cp.jxc.service.JsrService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +15,7 @@ public class TJJingShouRen extends JPanel {
 	private static Logger LOGGER = LoggerFactory.getLogger(TJJingShouRen.class);
 
 	private ApplicationContext context;
+	private JsrService jsrService;
 
 	private JTextField jsrName;
 
@@ -32,6 +34,7 @@ public class TJJingShouRen extends JPanel {
 	public TJJingShouRen(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.jsrService = context.getBean("jsrService", JsrService.class);
 		setLayout(new GridBagLayout());
 		setBounds(0, 0, 280, 236);
 		final JLabel label_4 = new JLabel();
@@ -109,7 +112,7 @@ public class TJJingShouRen extends JPanel {
 				if (nameStr == null || nameStr.isEmpty())
 					return;
 				String ageStr = new String(age.getText());
-				Jsr user = Dao.getJsr(nameStr, ageStr);
+				Jsr user = jsrService.getJsr(nameStr, ageStr);
 				if (user.getSex() != null && !user.getSex().isEmpty()) {
 					JOptionPane.showMessageDialog(TJJingShouRen.this, "经手人("
 							+ user.getName() + ")已存在！");
@@ -122,7 +125,7 @@ public class TJJingShouRen extends JPanel {
 				jsr.setAge(age.getText());
 				jsr.setName(nameStr);
 				jsr.setSex(sexStr);
-				int i = Dao.addJsr(jsr);
+				int i = jsrService.addJsr(jsr);
 				if (i > 0)
 					JOptionPane.showMessageDialog(TJJingShouRen.this, "添加成功");
 				clear();

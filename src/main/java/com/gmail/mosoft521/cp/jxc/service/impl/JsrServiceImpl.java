@@ -2,6 +2,7 @@ package com.gmail.mosoft521.cp.jxc.service.impl;
 
 import com.gmail.mosoft521.cp.jxc.dao.ext.JsrMapperExt;
 import com.gmail.mosoft521.cp.jxc.entity.Jsr;
+import com.gmail.mosoft521.cp.jxc.entity.JsrExample;
 import com.gmail.mosoft521.cp.jxc.service.JsrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,22 @@ public class JsrServiceImpl implements JsrService {
     @Override
     public int reduceEnableById(Integer id) {
         return jsrMapperExt.reduceEnableByPk(id);
+    }
+
+    @Override
+    public Jsr getJsr(String nameStr, String ageStr) {
+        JsrExample jsrExample = new JsrExample();
+        JsrExample.Criteria criteria = jsrExample.createCriteria();
+        List<Jsr> jsrs = jsrMapperExt.selectByExample(jsrExample);
+        if (jsrs.isEmpty()) {
+            return null;
+        } else {
+            return jsrs.get(0);
+        }
+    }
+
+    @Override
+    public int addJsr(Jsr jsr) {
+        return jsrMapperExt.insertSelective(jsr);
     }
 }
