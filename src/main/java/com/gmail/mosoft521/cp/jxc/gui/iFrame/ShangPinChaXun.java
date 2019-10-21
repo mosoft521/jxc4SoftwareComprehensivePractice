@@ -2,6 +2,7 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -19,6 +20,7 @@ public class ShangPinChaXun extends JInternalFrame {
 	private static Logger LOGGER = LoggerFactory.getLogger(ShangPinChaXun.class);
 
 	private ApplicationContext context;
+	private SpInfoService spInfoService;
 
 	private JTable table;
 	private JTextField conditionContent;
@@ -27,6 +29,7 @@ public class ShangPinChaXun extends JInternalFrame {
 	public ShangPinChaXun(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.spInfoService = context.getBean("spInfoService", SpInfoService.class);
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("商品查询");
@@ -75,7 +78,7 @@ public class ShangPinChaXun extends JInternalFrame {
 		showAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				conditionContent.setText("");
-				List list = Dao.getSpInfos();
+				List list = spInfoService.getSpInfos();
 				updateTable(list, dftm);
 			}
 		});
@@ -94,7 +97,7 @@ public class ShangPinChaXun extends JInternalFrame {
 			Item item = new Item();
 			item.setId((String) info.get(0));
 			item.setName((String) info.get(1));
-			spInfo = Dao.getSpInfo(item);//再次查询
+			spInfo = spInfoService.getSpInfo(item);//再次查询
 			Vector rowData = new Vector();
 			rowData.add(spInfo.getId().trim());
 			rowData.add(spInfo.getSpname().trim());
@@ -141,29 +144,7 @@ public class ShangPinChaXun extends JInternalFrame {
 		}
 		private List searchInfo(String conName, String conOperation,
 				String content, List list) {
-			String sql = "select * from Tb_Spinfo where ";
-			if (conOperation.equals("等于")) {
-				if (conName.equals("商品名称"))
-					list = Dao.findForList(sql + "spname='" + content + "'");
-				if (conName.equals("供应商"))
-					list = Dao.findForList(sql + "gysname='" + content + "'");
-				if (conName.equals("产地"))
-					list = Dao.findForList(sql + "cd='" + content + "'");
-				if (conName.equals("规格"))
-					list = Dao.findForList(sql + "gg='" + content + "'");
-			} else {
-				if (conName.equals("商品名称"))
-					list = Dao.findForList(sql + "spname like '%" + content
-							+ "%'");
-				if (conName.equals("供应商"))
-					list = Dao.findForList(sql + "gysname like '%" + content
-							+ "%'");
-				if (conName.equals("产地"))
-					list = Dao.findForList(sql + "cd like '%" + content + "%'");
-				if (conName.equals("规格"))
-					list = Dao.findForList(sql + "gg like '%" + content + "%'");
-			}
-			return list;
+			return spInfoService.searchInfo(conName, conOperation, content, list);
 		}
 	}
 }
