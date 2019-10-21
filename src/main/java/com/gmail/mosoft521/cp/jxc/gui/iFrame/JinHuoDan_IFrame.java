@@ -5,6 +5,11 @@ import com.gmail.mosoft521.cp.jxc.entity.Ruku;
 import com.gmail.mosoft521.cp.jxc.entity.RukuDetail;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
+import com.gmail.mosoft521.cp.jxc.service.RukuService;
+import com.gmail.mosoft521.cp.jxc.service.UserService;
+import com.gmail.mosoft521.vo.RukuVO;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +27,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,6 +40,14 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 	private static Logger LOGGER = LoggerFactory.getLogger(JinHuoDan_IFrame.class);
 
 	private ApplicationContext context;
+
+	private RukuService rukuService;
+	private GysInfoService gysInfoService;
+
+	//日期格式
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	//时间格式
+	private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	private JTextField idField;
 	private JTextField jhsjField;
@@ -222,7 +237,14 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 				String jsfsStr = jsfsComboBox.getSelectedItem().toString();
 				String jsrStr = jbrComboBox.getSelectedItem() + ""; 
 				String czyStr = czyField.getText().trim(); 
-				String rkDate = jhsjField.getText().trim(); 
+				String rkDate = jhsjField.getText().trim();
+				Date d = null;
+				try {
+					d = dateFormat.parse(rkDate);
+				} catch (ParseException pe) {
+					LOGGER.error("请输入yyyy-MM-dd的格式日期");
+					return;
+				}
 				String ysjlStr = ysjelField.getText().trim(); 
 				String id = idField.getText(); 
 				String gysName = gysComboBox.getSelectedItem() + "";
@@ -241,10 +263,19 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 					JOptionPane.showMessageDialog(JinHuoDan_IFrame.this,
 							"没有商品！");
 					return;
-				}			
-				Ruku ruMain = new Ruku(id, pzsStr, jeStr,
-						ysjlStr, gysName, rkDate, czyStr, jsrStr, jsfsStr);
-				Set<RukuDetail> set = ruMain.getSet();
+				}
+				RukuVO ruku = new RukuVO();
+				ruku.setRkid(id);
+				ruku.setPzs(pzsStr);
+				ruku.setJe(jeStr);
+				ruku.setYsjl(ysjlStr);
+				ruku.setGysname(gysName);
+				ruku.setRkdate(d);
+				ruku.setCzy(czyStr);
+				ruku.setJsr(jsrStr);
+				ruku.setJsfs(jsfsStr);
+				ruku.setJe(jeStr);
+				List<RukuDetail> detailArrayList = ruku.getDetailArrayList();
 				int rows = table.getRowCount();
 				for (int i = 0; i < rows; i++) {
 					SpInfo spinfo = (SpInfo) table.getValueAt(i, 0);
@@ -257,14 +288,14 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 					Float sl = Float.valueOf(slStr);
 					RukuDetail detail = new RukuDetail();
 					detail.setSpid(spinfo.getId());
-					detail.setRkid(ruMain.getRkid());
+					detail.setRkid(ruku.getRkid());
 					detail.setDj(dj.toString());
 					detail.setSl(sl);
-					set.add(detail);
+					detailArrayList.add(detail);
 				}
-				
-				boolean rs = Dao.insertRukuInfo(ruMain);
-				if (rs) {
+
+				RukuVO newRukuVO = rukuService.insertRukuInfo(ruku);
+				if (StringUtils.isNotEmpty(newRukuVO.getRkid())) {
 					JOptionPane.showMessageDialog(JinHuoDan_IFrame.this,
 							"入库成功！");
 					DefaultTableModel dftm = new DefaultTableModel();
@@ -310,8 +341,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 		if(gysComboBox == null){
 			gysComboBox = new JComboBox();
 			gysComboBox.setBounds(302, 10, 145, 21);
-			List gysInfos = Dao.getGysInfos();
-			Dao.closeResourse();
+			List<GysInfo> gysInfos = gysInfoService.getGysInfos();
 			Iterator it = gysInfos.iterator() ;
 			while(it.hasNext()){
 				List row = (List)it.next() ;
