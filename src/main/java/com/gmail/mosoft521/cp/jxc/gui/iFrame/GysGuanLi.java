@@ -2,13 +2,21 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.GysGuanli.GysTianJiaPanel;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.GysGuanli.GysXiuGaiPanel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class GysGuanLi extends JInternalFrame {
-	public GysGuanLi() {
+	private static Logger LOGGER = LoggerFactory.getLogger(GysGuanLi.class);
+
+	private ApplicationContext context;
+
+	public GysGuanLi(ApplicationContext context) {
+		this.context = context;
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("供应商管理");

@@ -1,6 +1,9 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.Jsr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TJJingShouRen extends JPanel {
+	private static Logger LOGGER = LoggerFactory.getLogger(TJJingShouRen.class);
+
+	private ApplicationContext context;
+
 	private JTextField jsrName;
 
 	private JTextField tel;
@@ -22,8 +29,9 @@ public class TJJingShouRen extends JPanel {
 		age.setText(null);
 	}
 
-	public TJJingShouRen() {
+	public TJJingShouRen(ApplicationContext context) {
 		super();
+		this.context = context;
 		setLayout(new GridBagLayout());
 		setBounds(0, 0, 280, 236);
 		final JLabel label_4 = new JLabel();

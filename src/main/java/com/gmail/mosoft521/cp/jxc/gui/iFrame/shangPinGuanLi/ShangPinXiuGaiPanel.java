@@ -3,6 +3,9 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.shangPinGuanLi;
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +16,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ShangPinXiuGaiPanel extends JPanel {
+	private static Logger LOGGER = LoggerFactory.getLogger(ShangPinXiuGaiPanel.class);
+
+	private ApplicationContext context;
+
 	private JComboBox gysQuanCheng;
 	private JTextField beiZhu;
 	private JTextField wenHao;
@@ -26,7 +33,8 @@ public class ShangPinXiuGaiPanel extends JPanel {
 	private JButton modifyButton;
 	private JButton delButton;
 	private JComboBox sp;
-	public ShangPinXiuGaiPanel() {
+	public ShangPinXiuGaiPanel(ApplicationContext context) {
+		this.context = context;
 		setLayout(new GridBagLayout());
 		setBounds(10, 10, 550, 400);
 

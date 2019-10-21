@@ -1,5 +1,9 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +11,10 @@ import java.awt.event.ActionListener;
 
 
 public class GengGaiMiMa extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(GengGaiMiMa.class);
+
+	private ApplicationContext context;
+
 	private JLabel name;
 
 	private JPasswordField oldPass;
@@ -15,8 +23,9 @@ public class GengGaiMiMa extends JInternalFrame {
 
 	private JPasswordField newPass1;
 
-	public GengGaiMiMa() {
+	public GengGaiMiMa(ApplicationContext context) {
 		super();
+		this.context = context;
 		setIconifiable(true);
 		setTitle("更改密码");
 		setClosable(true);

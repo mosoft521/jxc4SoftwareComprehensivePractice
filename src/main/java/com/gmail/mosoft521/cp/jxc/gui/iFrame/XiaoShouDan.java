@@ -2,10 +2,14 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.entity.Kucun;
+import com.gmail.mosoft521.cp.jxc.entity.Sell;
 import com.gmail.mosoft521.cp.jxc.entity.SellDetail;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.gui.mainFrame.MainFrame;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -29,6 +33,10 @@ import java.util.Set;
 import java.util.Vector;
 
 public class XiaoShouDan extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(XiaoShouDan.class);
+
+	private ApplicationContext context;
+
 	private final JTable table;
 
 	private final JTextField sellDate = new JTextField(); 
@@ -57,8 +65,9 @@ public class XiaoShouDan extends JInternalFrame {
 
 	private JComboBox sp;
 
-	public XiaoShouDan() {
+	public XiaoShouDan(ApplicationContext context) {
 		super();
+		this.context = context;
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
@@ -179,7 +188,7 @@ public class XiaoShouDan extends JInternalFrame {
 					JOptionPane.showMessageDialog(XiaoShouDan.this, "销售表为空");
 					return;
 				}
-				TbSellMain sellMain = new TbSellMain(id, pzsStr, jeStr,
+				Sell sellMain = new SellMain(id, pzsStr, jeStr,
 						ysjlStr, kehuName, rkDate, czyStr, jsrStr, jsfsStr);
 				Set<SellDetail> set = sellMain.getTbSellDetails();
 				int rows = table.getRowCount();

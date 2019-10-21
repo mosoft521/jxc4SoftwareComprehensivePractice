@@ -2,6 +2,9 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.keHuGuanLi;
 
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +18,10 @@ import java.util.List;
 
 
 public class KeHuXiuGaiPanel extends JPanel {
+	private static Logger LOGGER = LoggerFactory.getLogger(KeHuXiuGaiPanel.class);
+
+	private ApplicationContext context;
+
 	private JTextField keHuQuanCheng;
 	private JTextField yinHangZhangHao;
 	private JTextField kaiHuYinHang;
@@ -29,7 +36,8 @@ public class KeHuXiuGaiPanel extends JPanel {
 	private JButton modifyButton;
 	private JButton delButton;
 	private JComboBox kehu;
-	public KeHuXiuGaiPanel() {
+	public KeHuXiuGaiPanel(ApplicationContext context) {
+		this.context = context;
 		setBounds(10, 10, 460, 300);
 		setLayout(new GridBagLayout());
 		setVisible(true);

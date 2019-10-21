@@ -1,5 +1,9 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileFilter;
@@ -16,6 +20,9 @@ import java.util.Date;
 
 
 public class BackupAndRestore extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(BackupAndRestore.class);
+
+	private ApplicationContext context;
 
 	private JPanel jContentPane = null;
 	private JPanel backupPanel = null;
@@ -29,8 +36,9 @@ public class BackupAndRestore extends JInternalFrame {
 	/**
 	 * This is the xxx default constructor
 	 */
-	public BackupAndRestore() {
+	public BackupAndRestore(ApplicationContext context) {
 		super();
+		this.context = context;
 		initialize();
 	}
 

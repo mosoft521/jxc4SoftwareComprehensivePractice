@@ -1,5 +1,9 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -7,6 +11,9 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class Jinhuo_Tuihuo_IFrame extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(Jinhuo_Tuihuo_IFrame.class);
+
+	private ApplicationContext context;
 
 	private JPanel jContentPane = null;
 
@@ -71,8 +78,9 @@ public class Jinhuo_Tuihuo_IFrame extends JInternalFrame {
 	/**
 	 * This is the xxx default constructor
 	 */
-	public Jinhuo_Tuihuo_IFrame() {
+	public Jinhuo_Tuihuo_IFrame(ApplicationContext context) {
 		super();
+		this.context = context;
 		initialize();
 	}
 

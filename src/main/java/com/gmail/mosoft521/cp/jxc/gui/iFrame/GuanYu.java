@@ -1,5 +1,9 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +12,13 @@ import java.beans.PropertyVetoException;
 
 public class GuanYu extends JInternalFrame {
 
+	private static Logger LOGGER = LoggerFactory.getLogger(GuanYu.class);
 
-	public GuanYu() {
+	private ApplicationContext context;
+
+
+	public GuanYu(ApplicationContext context) {
+		this.context = context;
 		setBackground(Color.LIGHT_GRAY);
 		setNormalBounds(new Rectangle(50, 30, 0, 0));
 		setLocation(50, 30);

@@ -1,6 +1,10 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,6 +17,10 @@ import java.util.List;
 
 
 public class SetJSR extends JPanel {
+	private static Logger LOGGER = LoggerFactory.getLogger(SetJSR.class);
+
+	private ApplicationContext context;
+
 	private JTextField sexField;
 
 	private JTextField ageField;
@@ -25,8 +33,9 @@ public class SetJSR extends JPanel {
 
 	private String[] columnNames;
 
-	public SetJSR() {
+	public SetJSR(ApplicationContext context) {
 		super();
+		this.context = context;
 		setBounds(0, 0, 491, 200);
 		setLayout(new GridBagLayout());
 

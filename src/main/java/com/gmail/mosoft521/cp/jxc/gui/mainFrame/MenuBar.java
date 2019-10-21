@@ -15,6 +15,9 @@ import com.gmail.mosoft521.cp.jxc.gui.iFrame.ShangPinGuanLi;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.XiaoShouChaXun;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.XiaoShouDan;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.XiaoShouPaiHang;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -35,6 +38,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuBar extends JMenuBar {
+	private static Logger LOGGER = LoggerFactory.getLogger(MenuBar.class);
+
+	private ApplicationContext context;
+
 	private JMenu jinhuo_Menu = null ;
 	private JMenuItem jinhuoItem = null;
 	private JMenuItem jinhuo_tuihuoItem = null;
@@ -124,8 +131,9 @@ public class MenuBar extends JMenuBar {
 	private JDesktopPane desktopPanel = null;
 
 	
-	public MenuBar(JDesktopPane desktopPanel , JLabel stateLabel){
+	public MenuBar(ApplicationContext context,JDesktopPane desktopPanel , JLabel stateLabel){
 		super();
+		this.context = context;
 		iFrames = new HashMap<JMenuItem,JInternalFrame>();
 		this.stateLabel = stateLabel ;
 		this.desktopPanel = desktopPanel ;		
@@ -328,7 +336,7 @@ public class MenuBar extends JMenuBar {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					createFrame(guanyu_Item, GuanYu.class);
+					createFrame(context, guanyu_Item, GuanYu.class);
 				}
 			});
 		}
@@ -425,7 +433,7 @@ public class MenuBar extends JMenuBar {
 			mima_xiugaiItem
 					.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							createFrame(mima_xiugaiItem, GengGaiMiMa.class);
+							createFrame(context, mima_xiugaiItem, GengGaiMiMa.class);
 						}
 					});
 		}
@@ -441,7 +449,7 @@ public class MenuBar extends JMenuBar {
 			shuju_beifenItem
 					.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							createFrame(shuju_beifenItem, BackupAndRestore.class);
+							createFrame(context, shuju_beifenItem, BackupAndRestore.class);
 						}
 					});
 		}
@@ -470,7 +478,7 @@ public class MenuBar extends JMenuBar {
 					"/res/icon/jsr_shezhi.png")));
 			jsr_guanliItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					createFrame(jsr_guanliItem, JsrGL.class);
+					createFrame(context, jsr_guanliItem, JsrGL.class);
 				}
 			});
 		}
@@ -486,7 +494,7 @@ public class MenuBar extends JMenuBar {
 			gys_guanliItem
 					.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							createFrame(gys_guanliItem, GysGuanLi.class);
+							createFrame(context, gys_guanliItem, GysGuanLi.class);
 						}
 					});
 		}
@@ -501,7 +509,7 @@ public class MenuBar extends JMenuBar {
 					"/res/icon/kehu_guanli.png")));
 			kehu_guanliItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					createFrame(kehu_guanliItem, KeHuGuanLi.class);
+					createFrame(context, kehu_guanliItem, KeHuGuanLi.class);
 				}
 			});
 		}
@@ -515,7 +523,7 @@ public class MenuBar extends JMenuBar {
 					"/res/icon/shangpin_guanli.png")));
 			shangpin_guanliItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					createFrame(shangpin_guanliItem, ShangPinGuanLi.class);
+					createFrame(context, shangpin_guanliItem, ShangPinGuanLi.class);
 				}
 			});
 		}
@@ -544,7 +552,7 @@ public class MenuBar extends JMenuBar {
 			xiaoshou_paihangItem
 					.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							createFrame(xiaoshou_paihangItem, XiaoShouPaiHang.class);
+							createFrame(context, xiaoshou_paihangItem, XiaoShouPaiHang.class);
 						}
 					});
 		}
@@ -559,7 +567,7 @@ public class MenuBar extends JMenuBar {
 			shangpin_chaxunItem
 					.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							createFrame(shangpin_chaxunItem, ShangPinChaXun.class);
+							createFrame(context, shangpin_chaxunItem, ShangPinChaXun.class);
 						}
 					});
 		}
@@ -575,7 +583,7 @@ public class MenuBar extends JMenuBar {
 			xiaoshou_chaxunItem
 					.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							createFrame(xiaoshou_chaxunItem, XiaoShouChaXun.class);
+							createFrame(context, xiaoshou_chaxunItem, XiaoShouChaXun.class);
 						}
 					});
 		}
@@ -600,7 +608,7 @@ public class MenuBar extends JMenuBar {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					createFrame(jiage_tiaozhengItem, JiaGeTiaoZheng.class);
+					createFrame(context, jiage_tiaozhengItem, JiaGeTiaoZheng.class);
 				}
 			});
 		}
@@ -615,7 +623,7 @@ public class MenuBar extends JMenuBar {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					createFrame(kucun_pandianItem, KuCunPanDian.class);
+					createFrame(context, kucun_pandianItem, KuCunPanDian.class);
 				}
 			});
 		}
@@ -655,7 +663,7 @@ public class MenuBar extends JMenuBar {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					createFrame(xiaoshou_danItem, XiaoShouDan.class);
+					createFrame(context, xiaoshou_danItem, XiaoShouDan.class);
 				}
 			});
 		}
@@ -681,7 +689,7 @@ public class MenuBar extends JMenuBar {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					
-					createFrame(jinhuoItem, JinHuoDan_IFrame.class);
+					createFrame(context, jinhuoItem, JinHuoDan_IFrame.class);
 				}
 			});
 		}
@@ -697,7 +705,7 @@ public class MenuBar extends JMenuBar {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					createFrame(jinhuo_tuihuoItem, Jinhuo_Tuihuo_IFrame.class);
+					createFrame(context, jinhuo_tuihuoItem, Jinhuo_Tuihuo_IFrame.class);
 					
 				}
 			});
@@ -708,12 +716,12 @@ public class MenuBar extends JMenuBar {
 	 * 
 	 * 
 	 */
-	private JInternalFrame createFrame(JMenuItem item , Class clzz){
+	private JInternalFrame createFrame(ApplicationContext context, JMenuItem item, Class clzz) {
 		Constructor constructor = clzz.getConstructors()[0];
 		JInternalFrame interFrame = iFrames.get(item);
 		if(interFrame == null || interFrame.isClosed()){
 			try {
-				interFrame = (JInternalFrame)constructor.newInstance(new Object[]{});
+				interFrame = (JInternalFrame)constructor.newInstance(new Object[]{context});
 			} catch (InstantiationException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {

@@ -1,6 +1,9 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.Jsr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -16,6 +19,10 @@ import java.util.List;
 import java.util.Vector;
 
 public class XiaoShouChaXun extends JInternalFrame{
+	private static Logger LOGGER = LoggerFactory.getLogger(XiaoShouChaXun.class);
+
+	private ApplicationContext context;
+
 	private JButton queryButton;
 	private JTextField endDate;
 	private JTextField startDate;
@@ -26,7 +33,8 @@ public class XiaoShouChaXun extends JInternalFrame{
 	private Jsr user;
 	private DefaultTableModel dftm;
 	private JCheckBox selectDate;
-	public XiaoShouChaXun() {
+	public XiaoShouChaXun(ApplicationContext context) {
+		this.context = context;
 		addInternalFrameListener(new InternalFrameAdapter() {
 			public void internalFrameActivated(final InternalFrameEvent e) {
 				java.sql.Date date=new java.sql.Date(System.currentTimeMillis());

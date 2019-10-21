@@ -43,7 +43,7 @@ public class LoginDialog extends JFrame {
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
-		main = new MainFrame() ;
+		main = new MainFrame(context) ;
 		initialize();
 	}
 

@@ -2,6 +2,9 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.keHuGuanLi;
 
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.gui.KeyListener.InputKeyListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,10 @@ import java.sql.SQLException;
 
 
 public class KeHuTianJiaPanel extends JPanel {
+	private static Logger LOGGER = LoggerFactory.getLogger(KeHuTianJiaPanel.class);
+
+	private ApplicationContext context;
+
 	private JTextField keHuQuanCheng;
 	private JTextField yinHangZhangHao;
 	private JTextField kaiHuYinHang;
@@ -24,8 +31,9 @@ public class KeHuTianJiaPanel extends JPanel {
 	private JTextField diZhi;
 	private JTextField keHuJianCheng;
 	private JButton resetButton;
-	public KeHuTianJiaPanel() {
+	public KeHuTianJiaPanel(ApplicationContext context) {
 		super();
+		this.context = context;
 		setBounds(10, 10, 460, 300);
 		setLayout(new GridBagLayout());
 		setVisible(true);

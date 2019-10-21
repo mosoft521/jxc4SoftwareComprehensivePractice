@@ -3,6 +3,9 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.GysGuanli;
 
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.gui.KeyListener.InputKeyListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GysTianJiaPanel extends JPanel {
+	private static Logger LOGGER = LoggerFactory.getLogger(GysTianJiaPanel.class);
+
+	private ApplicationContext context;
+
 	private JTextField EMailF;
 	private JTextField yinHangF;
 	private JTextField lianXiRenDianHuaF;
@@ -23,7 +30,8 @@ public class GysTianJiaPanel extends JPanel {
 	private JTextField jianChengF;
 	private JTextField quanChengF;
 	private JButton resetButton;
-	public GysTianJiaPanel() {
+	public GysTianJiaPanel(ApplicationContext context) {
+		this.context = context;
 		setLayout(new GridBagLayout());
 		setBounds(10, 10, 510, 302);
 

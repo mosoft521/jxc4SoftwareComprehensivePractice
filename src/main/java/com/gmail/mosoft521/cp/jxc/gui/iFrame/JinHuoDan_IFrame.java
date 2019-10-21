@@ -5,6 +5,9 @@ import com.gmail.mosoft521.cp.jxc.entity.Ruku;
 import com.gmail.mosoft521.cp.jxc.entity.RukuDetail;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -27,6 +30,10 @@ import java.util.Set;
 import java.util.Vector;
 
 public class JinHuoDan_IFrame extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(JinHuoDan_IFrame.class);
+
+	private ApplicationContext context;
+
 	private JTextField idField;
 	private JTextField jhsjField;
 	private JTextField lxrField;
@@ -58,7 +65,8 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JinHuoDan_IFrame() {
+	public JinHuoDan_IFrame(ApplicationContext context) {
+		this.context = context;
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 714, 381);

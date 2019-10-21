@@ -2,6 +2,9 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.Kucun;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
@@ -17,6 +20,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class JiaGeTiaoZheng extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(JiaGeTiaoZheng.class);
+
+	private ApplicationContext context;
+
 	private Kucun kcInfo;
 	private JLabel guiGe;
 	private JTextField kuCunJinE;
@@ -28,8 +35,9 @@ public class JiaGeTiaoZheng extends JInternalFrame {
 		Integer sl = Integer.parseInt(kuCunShuLiang.getText());
 		kuCunJinE.setText((dj * sl) + "");
 	}
-	public JiaGeTiaoZheng() {
+	public JiaGeTiaoZheng(ApplicationContext context) {
 		super();
+		this.context = context;
 		addInternalFrameListener(new InternalFrameAdapter() {
 			public void internalFrameActivated(final InternalFrameEvent e) {
 				DefaultComboBoxModel mingChengModel = (DefaultComboBoxModel) shangPinMingCheng

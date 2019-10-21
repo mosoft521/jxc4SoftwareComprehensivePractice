@@ -1,10 +1,17 @@
 package com.gmail.mosoft521.cp.jxc.gui.mainFrame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
 public class MainFrame extends JFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(MainFrame.class);
+
+	private ApplicationContext context;
 
 	private MenuBar frameMenuBar = null ;
 	
@@ -25,12 +32,9 @@ public class MainFrame extends JFrame {
 
 	private JSeparator separator3 = null;
 	
-	public static void main(String[] args) {
-		
-	}
-		
-	public MainFrame(){
+	public MainFrame(ApplicationContext context){
 		super();
+		this.context = context;
 		try {
 			UIManager.setLookAndFeel(UIManager
 					.getSystemLookAndFeelClassName());
@@ -62,7 +66,7 @@ public class MainFrame extends JFrame {
 
 	private JToolBar getToolBar() {
 		if(toolbar == null){
-			toolbar = new ToolBar(getFrameMenuBar());
+			toolbar = new ToolBar(context, getFrameMenuBar());
 		}
 		return toolbar;
 	}
@@ -172,7 +176,7 @@ public class MainFrame extends JFrame {
 
 	private MenuBar getFrameMenuBar() {
 		if(frameMenuBar == null){
-			frameMenuBar = new MenuBar(getDesktopPanel(),getStateLabel());
+			frameMenuBar = new MenuBar(context,getDesktopPanel(),getStateLabel());
 		}
 		return frameMenuBar;
 	}
@@ -186,7 +190,7 @@ public class MainFrame extends JFrame {
 
 	private JDesktopPane getDesktopPanel() {
 		if(desktopPanel == null){
-			desktopPanel = new DesktopPanel();
+			desktopPanel = new DesktopPanel(context);
 		}
 		return desktopPanel;
 	}

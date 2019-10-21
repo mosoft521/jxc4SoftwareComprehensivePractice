@@ -1,15 +1,24 @@
 package com.gmail.mosoft521.cp.jxc.gui.mainFrame;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ToolBar extends JToolBar {
+	private static Logger LOGGER = LoggerFactory.getLogger(ToolBar.class);
+
+	private ApplicationContext context;
+
 	private MenuBar menuBar = null ;
 	
-	public ToolBar(MenuBar frameMenuBar){
+	public ToolBar(ApplicationContext context, MenuBar frameMenuBar){
 		super();
+		this.context = context;
 		this.menuBar = frameMenuBar ;
 		initialize();
 	}

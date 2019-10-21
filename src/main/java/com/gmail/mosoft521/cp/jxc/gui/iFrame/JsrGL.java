@@ -1,12 +1,21 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class JsrGL extends JInternalFrame {
-	public JsrGL() {
+	private static Logger LOGGER = LoggerFactory.getLogger(JsrGL.class);
+
+	private ApplicationContext context;
+
+	public JsrGL(ApplicationContext context) {
+		this.context = context;
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 491, 200);

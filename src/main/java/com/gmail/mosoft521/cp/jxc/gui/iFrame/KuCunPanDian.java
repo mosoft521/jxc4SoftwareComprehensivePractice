@@ -3,6 +3,9 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.gui.mainFrame.MainFrame;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +17,9 @@ import java.util.Date;
 import java.util.List;
 
 public class KuCunPanDian extends JInternalFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(KuCunPanDian.class);
+
+	private ApplicationContext context;
 
 	private final JTable table;
 
@@ -25,8 +31,9 @@ public class KuCunPanDian extends JInternalFrame {
 	
 	private Date pdDate = new Date();
 
-	public KuCunPanDian() {
+	public KuCunPanDian(ApplicationContext context) {
 		super();
+		this.context = context;
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
