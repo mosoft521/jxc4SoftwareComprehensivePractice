@@ -1,6 +1,10 @@
 package com.gmail.mosoft521.cp.jxc.gui.login;
 
 import com.gmail.mosoft521.cp.jxc.gui.mainFrame.MainFrame;
+import com.gmail.mosoft521.cp.jxc.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +13,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
+/**
+ * 登录的JFrame
+ */
 public class LoginDialog extends JFrame {
+	private static Logger LOGGER = LoggerFactory.getLogger(LoginDialog.class);
+
+	private ApplicationContext context;
+	private UserService userService;
 	
 	private LoginPanel loginPanel = null ;
 	private JLabel userLabel = null ;
@@ -22,16 +32,9 @@ public class LoginDialog extends JFrame {
 	private String username = null ;
 	private MainFrame main = null ;
 
-	public static void main(String[] args){
-		
-		LoginDialog login = new LoginDialog();
-		login.setVisible(true);
-
-	}
-	
-
-	
-	public LoginDialog(){
+	public LoginDialog(ApplicationContext context){
+		this.context = context;
+		this.userService = context.getBean("userService", UserService.class);
 		//设置主题与系统一致
 		try {
 			UIManager.setLookAndFeel(UIManager
@@ -96,7 +99,7 @@ public class LoginDialog extends JFrame {
 				public void actionPerformed(ActionEvent e) {					
 					username = userField.getText();
 					String psw = new String(passwordField.getPassword());	
-					if (!Dao.checkLogin(username, psw)) {
+					if (!userService.checkLogin(username, psw)) {
 						JOptionPane.showMessageDialog(LoginDialog.this,
 								"账户或密码错误", "登陆信息！",
 								JOptionPane.ERROR_MESSAGE);

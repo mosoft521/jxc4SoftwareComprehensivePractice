@@ -3,8 +3,6 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.GysGuanli;
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.gui.KeyListener.InputKeyListener;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
-import com.hui.javaBean.Item;
-import com.hui.javaBean.TbGysInfo;
 
 import javax.swing.*;
 import java.awt.*;
