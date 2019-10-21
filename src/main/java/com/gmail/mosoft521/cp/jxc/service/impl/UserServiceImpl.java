@@ -1,6 +1,7 @@
 package com.gmail.mosoft521.cp.jxc.service.impl;
 
 import com.gmail.mosoft521.cp.jxc.dao.UserMapper;
+import com.gmail.mosoft521.cp.jxc.entity.User;
 import com.gmail.mosoft521.cp.jxc.entity.UserExample;
 import com.gmail.mosoft521.cp.jxc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,17 @@ public class UserServiceImpl implements UserService {
         userExampleCriteria.andPassEqualTo(pass);
         long count = userMapper.countByExample(userExample);
         return count > 0;
+    }
+
+    @Override
+    public int modifyPassword(String oldPassStr, String newPassStr) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria userExampleCriteria = userExample.createCriteria();
+        userExampleCriteria.andPassEqualTo(oldPassStr);
+
+        User user = new User();
+        user.setPass(newPassStr);
+
+        return userMapper.updateByExampleSelective(user, userExample);
     }
 }

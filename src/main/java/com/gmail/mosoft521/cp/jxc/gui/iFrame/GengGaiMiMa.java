@@ -1,5 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
+import com.gmail.mosoft521.cp.jxc.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +15,7 @@ public class GengGaiMiMa extends JInternalFrame {
 	private static Logger LOGGER = LoggerFactory.getLogger(GengGaiMiMa.class);
 
 	private ApplicationContext context;
+	private UserService userService;
 
 	private JLabel name;
 
@@ -26,6 +28,7 @@ public class GengGaiMiMa extends JInternalFrame {
 	public GengGaiMiMa(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.userService = context.getBean("userService", UserService.class);
 		setIconifiable(true);
 		setTitle("更改密码");
 		setClosable(true);
@@ -106,7 +109,7 @@ public class GengGaiMiMa extends JInternalFrame {
 				String newPass2Str = newPass2.getText();
 				if (newPass1Str.equals(newPass2Str)) {
 					String oldPassStr = oldPass.getText();
-					int res = Dao.modifyPassword(oldPassStr, newPass1Str);
+					int res = userService.modifyPassword(oldPassStr, newPass1Str);
 					if (res <= 0) {
 						String failed = "密码修改失败！";
 						JOptionPane.showMessageDialog(getContentPane(), failed);
