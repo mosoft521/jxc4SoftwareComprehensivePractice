@@ -1,11 +1,20 @@
 package com.gmail.mosoft521.cp.jxc.gui.mainFrame;
 
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.BackupAndRestore;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.GengGaiMiMa;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.GuanYu;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.GysGuanLi;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.JiaGeTiaoZheng;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.JinHuoDan_IFrame;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.Jinhuo_Tuihuo_IFrame;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.JsrGL;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.KeHuGuanLi;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.KuCunPanDian;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.ShangPinChaXun;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.ShangPinGuanLi;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.XiaoShouChaXun;
 import com.gmail.mosoft521.cp.jxc.gui.iFrame.XiaoShouDan;
+import com.gmail.mosoft521.cp.jxc.gui.iFrame.XiaoShouPaiHang;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;

@@ -35,7 +35,7 @@ public class ToolBar extends JToolBar {
 		JButton button = new JButton(menuItem.getText());
 		button.setToolTipText(menuItem.getText());
 		button.setIcon(menuItem.getIcon());
-		button.setFocusable(false);//ȡ����ť�۽�
+		button.setFocusable(false);
 		button.addActionListener(new ActionListener() {
 			
 			@Override
