@@ -21,8 +21,8 @@ public class GysGuanLi extends JInternalFrame {
 		setClosable(true);
 		setTitle("供应商管理");
 		JTabbedPane tabPane = new JTabbedPane();
-		final GysXiuGaiPanel spxgPanel = new GysXiuGaiPanel();
-		final GysTianJiaPanel sptjPanel = new GysTianJiaPanel();
+		final GysXiuGaiPanel spxgPanel = new GysXiuGaiPanel(context);
+		final GysTianJiaPanel sptjPanel = new GysTianJiaPanel(context);
 		tabPane.addTab("供应商添加", null, sptjPanel, "供应商添加");
 		tabPane.addTab("供应商修改", null, spxgPanel, "供应商修改");
 		getContentPane().add(tabPane);

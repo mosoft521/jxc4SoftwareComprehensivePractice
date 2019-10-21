@@ -24,8 +24,8 @@ public class ShangPinGuanLi extends JInternalFrame {
         setClosable(true);
         setTitle("商品管理");
         JTabbedPane tabPane = new JTabbedPane();
-        final ShangPinXiuGaiPanel spxgPanel = new ShangPinXiuGaiPanel();
-        final ShangPinTianJiaPanel sptjPanel = new ShangPinTianJiaPanel();
+        final ShangPinXiuGaiPanel spxgPanel = new ShangPinXiuGaiPanel(context);
+        final ShangPinTianJiaPanel sptjPanel = new ShangPinTianJiaPanel(context);
         tabPane.addTab("商品添加", null, sptjPanel, "商品添加&&");
         tabPane.addTab("商品修改", null, spxgPanel, "商品修改&&");
         getContentPane().add(tabPane);

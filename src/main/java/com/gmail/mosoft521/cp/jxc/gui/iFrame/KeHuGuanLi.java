@@ -21,8 +21,8 @@ public class KeHuGuanLi extends JInternalFrame {
 		setClosable(true);
 		setTitle("客户管理");
 		JTabbedPane tabPane = new JTabbedPane();
-		final KeHuXiuGaiPanel khxgPanel = new KeHuXiuGaiPanel();
-		final KeHuTianJiaPanel khtjPanel = new KeHuTianJiaPanel();
+		final KeHuXiuGaiPanel khxgPanel = new KeHuXiuGaiPanel(context);
+		final KeHuTianJiaPanel khtjPanel = new KeHuTianJiaPanel(context);
 		tabPane.addTab("客户添加", null, khtjPanel, "客户添加");
 		tabPane.addTab("客户修改", null, khxgPanel, "客户修改");
 		getContentPane().add(tabPane);

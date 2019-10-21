@@ -257,8 +257,8 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 					Float sl = Float.valueOf(slStr);
 					RukuDetail detail = new RukuDetail();
 					detail.setSpid(spinfo.getId());
-					detail.setRkID(ruMain.getRkID());
-					detail.setDj(dj);
+					detail.setRkid(ruMain.getRkid());
+					detail.setDj(dj.toString());
 					detail.setSl(sl);
 					set.add(detail);
 				}

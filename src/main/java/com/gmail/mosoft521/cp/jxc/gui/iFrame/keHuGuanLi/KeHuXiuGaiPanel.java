@@ -205,7 +205,7 @@ public class KeHuXiuGaiPanel extends JPanel {
 			return;
 		}
 		selectedItem = (Item) kehu.getSelectedItem();
-		TbKhInfo khInfo = Dao.getKhInfo(selectedItem);
+		KhInfo khInfo = Dao.getKhInfo(selectedItem);
 		keHuQuanCheng.setText(khInfo.getKhname());
 		diZhi.setText(khInfo.getAddress());
 		keHuJianCheng.setText(khInfo.getJian());

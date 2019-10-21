@@ -188,7 +188,7 @@ public class XiaoShouDan extends JInternalFrame {
 					JOptionPane.showMessageDialog(XiaoShouDan.this, "销售表为空");
 					return;
 				}
-				Sell sellMain = new SellMain(id, pzsStr, jeStr,
+				Sell sellMain = new Sell(id, pzsStr, jeStr,
 						ysjlStr, kehuName, rkDate, czyStr, jsrStr, jsfsStr);
 				Set<SellDetail> set = sellMain.getTbSellDetails();
 				int rows = table.getRowCount();
@@ -200,7 +200,7 @@ public class XiaoShouDan extends JInternalFrame {
 					Float sl = Float.valueOf(slStr);
 					SellDetail detail = new SellDetail();
 					detail.setSpid(spinfo.getId());
-					detail.setSellID(sellMain.getSellId());
+					detail.setSellid(sellMain.getSellid());
 					detail.setDj(dj);
 					detail.setSl(sl);
 					set.add(detail);

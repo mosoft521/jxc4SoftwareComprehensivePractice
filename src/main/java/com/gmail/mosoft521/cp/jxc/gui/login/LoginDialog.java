@@ -58,7 +58,7 @@ public class LoginDialog extends JFrame {
 
 	private LoginPanel getLoginPanel() {
 		if(loginPanel == null){
-			loginPanel = new LoginPanel();
+			loginPanel = new LoginPanel(context);
 			loginPanel.setBackground(new Color(0xD8DDC7));
 			userLabel = new JLabel("用户名:");
 			pswLabel = new JLabel("密码:");

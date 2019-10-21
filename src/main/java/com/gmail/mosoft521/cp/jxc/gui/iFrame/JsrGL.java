@@ -21,8 +21,8 @@ public class JsrGL extends JInternalFrame {
 		setBounds(100, 100, 491, 200);
 		setTitle("经手人管理");
 		JTabbedPane tabPane = new JTabbedPane();
-		final TJJingShouRen tjPanel = new TJJingShouRen();
-		final SetJSR setPanel = new SetJSR();
+		final TJJingShouRen tjPanel = new TJJingShouRen(context);
+		final SetJSR setPanel = new SetJSR(context);
 		tabPane.addTab("添加", null, tjPanel, "添加");
 		tabPane.addTab("设置", null, setPanel, "设置");
 		getContentPane().add(tabPane);
