@@ -4,7 +4,9 @@ import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.entity.GysInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GysInfoMapper {
     long countByExample(GysInfoExample example);
 

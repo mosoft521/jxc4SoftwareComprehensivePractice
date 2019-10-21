@@ -4,7 +4,9 @@ import com.gmail.mosoft521.cp.jxc.entity.Sell;
 import com.gmail.mosoft521.cp.jxc.entity.SellExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SellMapper {
     long countByExample(SellExample example);
 

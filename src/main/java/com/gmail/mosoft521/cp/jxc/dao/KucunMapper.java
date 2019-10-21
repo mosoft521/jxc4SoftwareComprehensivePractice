@@ -4,7 +4,9 @@ import com.gmail.mosoft521.cp.jxc.entity.Kucun;
 import com.gmail.mosoft521.cp.jxc.entity.KucunExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface KucunMapper {
     long countByExample(KucunExample example);
 
