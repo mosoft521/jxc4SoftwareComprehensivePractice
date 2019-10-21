@@ -1,7 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.service.impl;
 
-import com.gmail.mosoft521.cp.jxc.dao.GysInfoMapper;
-import com.gmail.mosoft521.cp.jxc.dao.JsrMapper;
+import com.gmail.mosoft521.cp.jxc.dao.ext.JsrMapperExt;
 import com.gmail.mosoft521.cp.jxc.entity.Jsr;
 import com.gmail.mosoft521.cp.jxc.service.JsrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +14,20 @@ import java.util.List;
 public class JsrServiceImpl implements JsrService {
 
     @Autowired
-    private JsrMapper jsrMapper;
+    private JsrMapperExt jsrMapperExt;
 
     @Override
     public List<Jsr> getJsrs() {
-        return jsrMapper.selectByExample(null);
+        return jsrMapperExt.selectByExample(null);
     }
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        return jsrMapper.deleteByPrimaryKey(id);
+        return jsrMapperExt.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int reduceEnableById(Integer id) {
+        return jsrMapperExt.reduceEnableByPk(id);
     }
 }

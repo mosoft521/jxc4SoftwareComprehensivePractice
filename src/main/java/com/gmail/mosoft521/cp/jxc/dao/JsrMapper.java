@@ -2,11 +2,11 @@ package com.gmail.mosoft521.cp.jxc.dao;
 
 import com.gmail.mosoft521.cp.jxc.entity.Jsr;
 import com.gmail.mosoft521.cp.jxc.entity.JsrExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
+
 public interface JsrMapper {
     long countByExample(JsrExample example);
 

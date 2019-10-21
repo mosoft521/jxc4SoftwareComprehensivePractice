@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface JsrService {
     List<Jsr> getJsrs();
+
     int deleteByPrimaryKey(Integer id);
+
+    int reduceEnableById(Integer id);
 }
