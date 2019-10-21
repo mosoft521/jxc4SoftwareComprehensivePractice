@@ -1,13 +1,12 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
-import com.gmail.mosoft521.cp.jxc.entity.Ruku;
 import com.gmail.mosoft521.cp.jxc.entity.RukuDetail;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
 import com.gmail.mosoft521.cp.jxc.service.RukuService;
-import com.gmail.mosoft521.cp.jxc.service.UserService;
+import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import com.gmail.mosoft521.vo.RukuVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -33,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 
 public class JinHuoDan_IFrame extends JInternalFrame {
@@ -43,6 +41,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 
 	private RukuService rukuService;
 	private GysInfoService gysInfoService;
+	private SpInfoService spInfoService;
 
 	//日期格式
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -82,6 +81,9 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 	 */
 	public JinHuoDan_IFrame(ApplicationContext context) {
 		this.context = context;
+		this.rukuService = context.getBean("rukuService", RukuService.class);
+		this.gysInfoService = context.getBean("gysInfoService", GysInfoService.class);
+		this.spInfoService = context.getBean("spInfoService", SpInfoService.class);
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 714, 381);
@@ -213,6 +215,12 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 						spComboBox.removeAllItems();
 						spComboBox.addItem(new SpInfo());
 						ResultSet rs = Dao.query("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
+//						GysInfo gysInfo = null;
+//						if (StringUtils.isNotEmpty(item.getId())) {
+//							gysInfo = gysInfoService.getGysInfoById(item.getId());
+//						} else if(StringUtils.isNotEmpty(item.getName())) {
+//							gysInfo = gysInfoService.getGysInfoByName(item.getName());
+//						}
 						System.out.println("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
 						updateSpComboBox(rs);
 						
@@ -366,8 +374,12 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 
 	private void updateLxr() {
 		Item item = (Item)gysComboBox.getSelectedItem();
-		GysInfo gysInfo = Dao.getGysInfo(item);
-		Dao.closeResourse();
+		GysInfo gysInfo = null;
+		if (StringUtils.isNotEmpty(item.getId())) {
+			gysInfo = gysInfoService.getGysInfoById(item.getId());
+		} else if(StringUtils.isNotEmpty(item.getName())) {
+			gysInfo = gysInfoService.getGysInfoByName(item.getName());
+		}
 		lxrField.setText(gysInfo.getLian());
 		
 	}
@@ -523,6 +535,5 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		Dao.closeResourse();
 	}
 }

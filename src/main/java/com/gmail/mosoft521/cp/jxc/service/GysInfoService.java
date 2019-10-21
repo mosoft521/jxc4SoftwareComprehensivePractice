@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GysInfoService {
     List<GysInfo> getGysInfos();
+    GysInfo getGysInfoById(String id);
+    GysInfo getGysInfoByName(String name);
 }
