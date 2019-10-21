@@ -2,6 +2,7 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 import com.gmail.mosoft521.cp.jxc.entity.Kucun;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.service.KucunService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -16,13 +17,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Iterator;
 import java.util.List;
 
 public class JiaGeTiaoZheng extends JInternalFrame {
 	private static Logger LOGGER = LoggerFactory.getLogger(JiaGeTiaoZheng.class);
 
 	private ApplicationContext context;
+	private KucunService kucunService;
 
 	private Kucun kcInfo;
 	private JLabel guiGe;
@@ -38,18 +39,17 @@ public class JiaGeTiaoZheng extends JInternalFrame {
 	public JiaGeTiaoZheng(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.kucunService = context.getBean("kucunService", KucunService.class);
 		addInternalFrameListener(new InternalFrameAdapter() {
 			public void internalFrameActivated(final InternalFrameEvent e) {
 				DefaultComboBoxModel mingChengModel = (DefaultComboBoxModel) shangPinMingCheng
 						.getModel();
 				mingChengModel.removeAllElements();
-				List list = Dao.getKucunInfos();
-				Iterator iterator = list.iterator();
-				while (iterator.hasNext()) {
-					List element = (List) iterator.next();
+				List<Kucun> list = kucunService.getKucunInfos();
+				for(Kucun kucun:list) {
 					Item item=new Item();
-					item.setId((String) element.get(0));
-					item.setName((String) element.get(1));
+					item.setId(kucun.getId());
+					item.setName(kucun.getSpname());
 					mingChengModel.addElement(item);
 				}
 			}
@@ -108,7 +108,7 @@ public class JiaGeTiaoZheng extends JInternalFrame {
 			public void actionPerformed(final ActionEvent e) {
 				kcInfo.setDj(Float.valueOf(danJia.getText()));
 				kcInfo.setKcsl(Float.valueOf(kuCunShuLiang.getText()));
-				int rs = Dao.updateKucunDj(kcInfo);
+				int rs = kucunService.updateKucunDj(kcInfo);
 				if (rs > 0)
 					JOptionPane.showMessageDialog(getContentPane(), "更改成功",
 							kcInfo.getSpname() + "提示信息",
@@ -133,7 +133,7 @@ public class JiaGeTiaoZheng extends JInternalFrame {
 				if (selectedItem == null)
 					return;
 				Item item = (Item) selectedItem;
-				kcInfo = Dao.getKucun(item);
+				kcInfo = kucunService.getKucun(item);
 				if(kcInfo.getId()==null)
 					return;
 				int dj, sl;
