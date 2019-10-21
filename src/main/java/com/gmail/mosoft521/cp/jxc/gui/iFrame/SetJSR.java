@@ -1,6 +1,8 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
 
+import com.gmail.mosoft521.cp.jxc.service.JsrService;
+import com.gmail.mosoft521.cp.jxc.service.KucunService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -20,6 +22,7 @@ public class SetJSR extends JPanel {
 	private static Logger LOGGER = LoggerFactory.getLogger(SetJSR.class);
 
 	private ApplicationContext context;
+	private JsrService jsrService;
 
 	private JTextField sexField;
 
@@ -36,6 +39,7 @@ public class SetJSR extends JPanel {
 	public SetJSR(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.jsrService = context.getBean("jsrService", JsrService.class);
 		setBounds(0, 0, 491, 200);
 		setLayout(new GridBagLayout());
 
@@ -136,7 +140,7 @@ public class SetJSR extends JPanel {
 					if(selRow<0)
 						return;
 					String id = table.getValueAt(selRow, 0).toString().trim();
-					Dao.delete("delete from tb_jsr where id='" + id + "'");
+					jsrService.deleteByPrimaryKey(Integer.parseInt(id));
 					sexField.setText("");
 					ageField.setText("");
 					nameField.setText("");
@@ -185,7 +189,7 @@ public class SetJSR extends JPanel {
 	}
 
 	public void initTable() {
-		List ul = Dao.getJsrs();
+		List ul = jsrService.getJsrs();
 		Iterator it = ul.iterator();
 		String[] data = new String[6];
 		dftm.setDataVector(null, columnNames);
