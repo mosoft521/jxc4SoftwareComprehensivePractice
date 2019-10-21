@@ -3,6 +3,8 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.gui.mainFrame.MainFrame;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.service.KucunService;
+import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -20,6 +22,8 @@ public class KuCunPanDian extends JInternalFrame {
 	private static Logger LOGGER = LoggerFactory.getLogger(KuCunPanDian.class);
 
 	private ApplicationContext context;
+	private KucunService kucunService;
+	private SpInfoService spInfoService;
 
 	private final JTable table;
 
@@ -34,6 +38,8 @@ public class KuCunPanDian extends JInternalFrame {
 	public KuCunPanDian(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.kucunService = context.getBean("kucunService", KucunService.class);
+		this.spInfoService = context.getBean("spInfoService", SpInfoService.class);
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
@@ -90,13 +96,13 @@ public class KuCunPanDian extends JInternalFrame {
 		TableColumn syColumn = table.getColumnModel().getColumn(10);
 		pdColumn.setCellEditor(pdEditor);
 		syColumn.setCellEditor(readOnlyEditor);
-		List kcInfos = Dao.getKucunInfos();
+		List kcInfos = kucunService.getKucunInfos();
 		for (int i = 0; i < kcInfos.size(); i++) {
 			List info = (List) kcInfos.get(i);
 			Item item = new Item();
 			item.setId((String) info.get(0));
 			item.setName((String) info.get(1));
-			SpInfo spinfo = Dao.getSpInfo(item);
+			SpInfo spinfo = spInfoService.getSpInfo(item);
 			Object[] row = new Object[columnNames.length];
 			if (spinfo.getId() != null && !spinfo.getId().isEmpty()) {
 				row[0] = spinfo.getSpname();
