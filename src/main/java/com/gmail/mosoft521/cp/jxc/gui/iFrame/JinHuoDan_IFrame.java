@@ -24,8 +24,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -204,7 +202,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				java.sql.Date date = new java.sql.Date(jhsjDate.getTime());
 				jhsjField.setText(date.toString());
-				String maxId = Dao.getRuKuMainMaxId(date);
+				String maxId = rukuService.getRuKuMainMaxId(date);
 				idField.setText(maxId);
 				stopTableCellEditing();
 				for (int i = 0; i <= table.getRowCount()-1; i++) {
@@ -214,15 +212,9 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 
 						spComboBox.removeAllItems();
 						spComboBox.addItem(new SpInfo());
-						ResultSet rs = Dao.query("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
-//						GysInfo gysInfo = null;
-//						if (StringUtils.isNotEmpty(item.getId())) {
-//							gysInfo = gysInfoService.getGysInfoById(item.getId());
-//						} else if(StringUtils.isNotEmpty(item.getName())) {
-//							gysInfo = gysInfoService.getGysInfoByName(item.getName());
-//						}
+						List<SpInfo> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
 						System.out.println("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
-						updateSpComboBox(rs);
+						updateSpComboBox(spInfoList);
 
 						return;
 					}
@@ -457,9 +449,9 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 					}
 					spComboBox.removeAllItems();
 					spComboBox.addItem(new SpInfo());
-					ResultSet rs = Dao.query("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
+					List<SpInfo> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
 					System.out.println("更新商品："+"select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
-					updateSpComboBox(rs);
+					updateSpComboBox(spInfoList);
 				}
 			});
 
@@ -493,7 +485,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 		}
 	}
 
-	protected void updateSpComboBox(ResultSet set) {
+	protected void updateSpComboBox(List<SpInfo> spInfoList) {
 		//判断原来表中已有的商品
 		for(int i = 0 ; table != null && i <table.getRowCount() ; i++ ){
 			SpInfo spinfo1 =(SpInfo)table.getValueAt(i, 0);
@@ -503,31 +495,12 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 			}
 		}
 
-
-
-		try {
-			while (set.next()) {
-				SpInfo spinfo = new SpInfo();
-				spinfo.setId(set.getString("id").trim());
-				spinfo.setSpname(set.getString("spname").trim());
-				spinfo.setCd(set.getString("cd").trim());
-				spinfo.setJc(set.getString("jc").trim());
-				spinfo.setDw(set.getString("dw").trim());
-				spinfo.setGg(set.getString("gg").trim());
-				spinfo.setBz(set.getString("bz").trim());
-				spinfo.setPh(set.getString("ph").trim());
-				spinfo.setPzwh(set.getString("pzwh").trim());
-				spinfo.setMemo(set.getString("memo").trim());
-				spinfo.setGysname(set.getString("gysname").trim());
-				DefaultComboBoxModel model = (DefaultComboBoxModel) spComboBox
-						.getModel();
-				if (model.getIndexOf(spinfo) < 0 && !list.contains(spinfo.getId()))
-				{
-					spComboBox.addItem(spinfo);
-				}
+		for(SpInfo spInfo:spInfoList){
+			DefaultComboBoxModel model = (DefaultComboBoxModel) spComboBox.getModel();
+			if (model.getIndexOf(spInfo) < 0 && !list.contains(spInfo.getId()))
+			{
+				spComboBox.addItem(spInfo);
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
 		}
 	}
 }

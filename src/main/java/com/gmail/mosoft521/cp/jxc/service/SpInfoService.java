@@ -23,4 +23,6 @@ public interface SpInfoService {
     int updateSp(SpInfo spInfo);
 
     List<SpInfo> selectExistKucun();
+
+    List<SpInfo> selectByGysName(String gysName);
 }

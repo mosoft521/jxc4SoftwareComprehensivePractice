@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service("rukuService")
 @Transactional
 public class RukuServiceImpl implements RukuService {
@@ -20,6 +22,16 @@ public class RukuServiceImpl implements RukuService {
 
     @Override
     public RukuVO insertRukuInfo(RukuVO rukuVO) {
+        return null;
+    }
+
+    @Override
+    public String selectMaxId() {
+        return null;
+    }
+
+    @Override
+    public String getRuKuMainMaxId(Date date) {
         return null;
     }
 }

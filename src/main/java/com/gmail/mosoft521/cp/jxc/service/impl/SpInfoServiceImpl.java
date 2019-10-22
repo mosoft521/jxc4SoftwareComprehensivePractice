@@ -107,4 +107,13 @@ public class SpInfoServiceImpl implements SpInfoService {
     public List<SpInfo> selectExistKucun() {
         return spInfoMapperExt.selectExistKucun();
     }
+
+    @Override
+    public List<SpInfo> selectByGysName(String gysName) {
+        SpInfoExample example = new SpInfoExample();
+        SpInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andGysnameEqualTo(gysName);
+        List<SpInfo> spInfoList = spInfoMapperExt.selectByExample(example);
+        return spInfoList;
+    }
 }
