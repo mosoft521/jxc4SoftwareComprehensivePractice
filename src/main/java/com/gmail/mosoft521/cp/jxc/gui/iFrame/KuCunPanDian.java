@@ -1,5 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 
+import com.gmail.mosoft521.cp.jxc.entity.Kucun;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.gui.mainFrame.MainFrame;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
@@ -96,32 +97,29 @@ public class KuCunPanDian extends JInternalFrame {
 		TableColumn syColumn = table.getColumnModel().getColumn(10);
 		pdColumn.setCellEditor(pdEditor);
 		syColumn.setCellEditor(readOnlyEditor);
-		List kcInfos = kucunService.getKucunInfos();
-		for (int i = 0; i < kcInfos.size(); i++) {
-			List info = (List) kcInfos.get(i);
+		List<Kucun> kucunList = kucunService.getKucunInfos();
+		for (Kucun kucun : kucunList) {
 			Item item = new Item();
-			item.setId((String) info.get(0));
-			item.setName((String) info.get(1));
+			item.setId(kucun.getId());
+			item.setName(kucun.getSpname());
 			SpInfo spinfo = spInfoService.getSpInfo(item);
 			Object[] row = new Object[columnNames.length];
-			if (spinfo.getId() != null && !spinfo.getId().isEmpty()) {
-				row[0] = spinfo.getSpname();
-				row[1] = spinfo.getId();
-				row[2] = spinfo.getGysname();
-				row[3] = spinfo.getCd();
-				row[4] = spinfo.getDw();
-				row[5] = spinfo.getGg();
-				row[6] = info.get(2).toString();
-				row[7] = info.get(7).toString();
-				row[8] = spinfo.getBz();
-				row[9] = "";
-				row[10] = "";
-				tableModel.addRow(row);
-				String pzsStr = pzs.getText();
-				int pzsInt = Integer.parseInt(pzsStr);
-				pzsInt++;
-				pzs.setText(pzsInt + "");
-			}
+			row[0] = spinfo.getSpname();
+			row[1] = spinfo.getId();
+			row[2] = spinfo.getGysname();
+			row[3] = spinfo.getCd();
+			row[4] = spinfo.getDw();
+			row[5] = spinfo.getGg();
+			row[6] = kucun.getGg();
+			row[7] = kucun.getKcsl();
+			row[8] = spinfo.getBz();
+			row[9] = "";
+			row[10] = "";
+			tableModel.addRow(row);
+			String pzsStr = pzs.getText();
+			int pzsInt = Integer.parseInt(pzsStr);
+			pzsInt++;
+			pzs.setText(pzsInt + "");
 		}
 	}
 	private class PanDianKeyAdapter extends KeyAdapter {
