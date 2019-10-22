@@ -40,4 +40,18 @@ public class GysInfoServiceImpl implements GysInfoService {
             }
         }
     }
+
+    @Override
+    public boolean existQuanChengF(String quanCheng) {
+        GysInfoExample example = new GysInfoExample();
+        GysInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andNameEqualTo(quanCheng);
+        List<GysInfo> gysInfoList = gysInfoMapper.selectByExample(example);
+        return !gysInfoList.isEmpty();
+    }
+
+    @Override
+    public int addGys(GysInfo gysInfo) {
+        return gysInfoMapper.insert(gysInfo);
+    }
 }
