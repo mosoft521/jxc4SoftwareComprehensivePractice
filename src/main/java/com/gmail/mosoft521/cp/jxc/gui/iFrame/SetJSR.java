@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -188,19 +187,16 @@ public class SetJSR extends JPanel {
     }
 
     public void initTable() {
-        List ul = jsrService.getJsrs();
-        Iterator it = ul.iterator();
+        List<Jsr> jsrList = jsrService.getJsrs();
         String[] data = new String[6];
         dftm.setDataVector(null, columnNames);
-        while (it.hasNext()) {
-
-            List userlist = (List) it.next();
-            data[0] = (String) userlist.get(0);
-            data[1] = (String) userlist.get(1);
-            data[2] = (String) userlist.get(2);
-            data[3] = (String) userlist.get(3);
-            data[4] = (String) userlist.get(4);
-            data[5] = ((String) userlist.get(5)).equals("1") ? "是" : "否";
+        for (Jsr jsr : jsrList) {
+            data[0] = Integer.toString(jsr.getId());
+            data[1] = jsr.getName();
+            data[2] = jsr.getSex();
+            data[3] = jsr.getAge();
+            data[4] = jsr.getTel();
+            data[5] = jsr.getEnable() == 1 ? "是" : "否";
             dftm.addRow(data);
         }
         setVisible(true);

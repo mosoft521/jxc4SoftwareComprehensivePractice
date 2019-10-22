@@ -149,14 +149,13 @@ public class ShangPinXiuGaiPanel extends JPanel {
 	}
 	//初始化商品栏
 	public void initComboBox() {
-		List khInfo = spInfoService.getSpInfos();
-		List<Item> items = new ArrayList<Item>();
+		List<SpInfo> spInfoList = spInfoService.getSpInfos();
+		List<Item> items = new ArrayList<Item>();//排重用，待优化
 		sp.removeAllItems();
-		for (Iterator iter = khInfo.iterator(); iter.hasNext();) {
-			List element = (List) iter.next();
+		for (SpInfo spInfo : spInfoList) {
 			Item item = new Item();
-			item.setId(element.get(0).toString().trim());
-			item.setName(element.get(1).toString().trim());
+			item.setId(spInfo.getId());
+			item.setName(spInfo.getSpname());
 			if (items.contains(item))
 				continue;
 			items.add(item);

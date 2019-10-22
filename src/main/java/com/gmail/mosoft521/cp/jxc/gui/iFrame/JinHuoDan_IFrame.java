@@ -28,7 +28,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -341,15 +340,14 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 		if(gysComboBox == null){
 			gysComboBox = new JComboBox();
 			gysComboBox.setBounds(302, 10, 145, 21);
-			List<GysInfo> gysInfos = gysInfoService.getGysInfos();
-			Iterator it = gysInfos.iterator() ;
-			while(it.hasNext()){
-				List row = (List)it.next() ;
+			List<GysInfo> gysInfoList = gysInfoService.getGysInfos();
+			for(GysInfo gysInfo:gysInfoList) {
 				Item item = new Item();
-				item.setId(row.get(0).toString().trim());
-				item.setName(row.get(1).toString().trim());
+				item.setId(gysInfo.getId());
+				item.setName(gysInfo.getName());
 				gysComboBox.addItem(item);
 			}
+
 			updateLxr();
 			gysComboBox.addItemListener(new ItemListener() {
 

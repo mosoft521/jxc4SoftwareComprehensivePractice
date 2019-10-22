@@ -1,6 +1,5 @@
 package com.gmail.mosoft521.cp.jxc.service;
 
-import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 

@@ -31,7 +31,6 @@ import java.awt.event.ContainerListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -361,12 +360,11 @@ public class XiaoShouDan extends JInternalFrame {
         }
 
         private void initKehuField() {//
-            List gysInfos = khInfoService.getKhInfos();
-            for (Iterator iter = gysInfos.iterator(); iter.hasNext(); ) {
-                List list = (List) iter.next();
+            List<KhInfo> khInfoList = khInfoService.getKhInfos();
+            for (KhInfo khInfo : khInfoList) {
                 Item item = new Item();
-                item.setId(list.get(0).toString().trim());
-                item.setName(list.get(1).toString().trim());
+                item.setId(khInfo.getId());
+                item.setName(khInfo.getKhname());
                 kehu.addItem(item);
             }
             doKhSelectAction();

@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class KeHuXiuGaiPanel extends JPanel {
@@ -170,14 +169,13 @@ public class KeHuXiuGaiPanel extends JPanel {
 	}
 
 	public void initComboBox() {
-		List khInfo = khInfoService.getKhInfos();
+		List<KhInfo> khInfoList = khInfoService.getKhInfos();
 		List<Item> items = new ArrayList<Item>();
 		kehu.removeAllItems();
-		for (Iterator iter = khInfo.iterator(); iter.hasNext();) {
-			List element = (List) iter.next();
+		for (KhInfo khInfo : khInfoList) {
 			Item item = new Item();
-			item.setId(element.get(0).toString().trim());
-			item.setName(element.get(1).toString().trim());
+			item.setId(khInfo.getId());
+			item.setName(khInfo.getKhname());
 			if (items.contains(item))
 				continue;
 			items.add(item);

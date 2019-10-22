@@ -152,14 +152,13 @@ public class GysXiuGaiPanel extends JPanel {
     }
 
     public void initComboBox() {
-        List<GysInfo> gysInfo = gysInfoService.getGysInfos();
+        List<GysInfo> gysInfoList = gysInfoService.getGysInfos();
         List<Item> items = new ArrayList<Item>();
         gys.removeAllItems();
-        for (Iterator iter = gysInfo.iterator(); iter.hasNext(); ) {
-            List element = (List) iter.next();
+        for (GysInfo gysInfo:gysInfoList) {
             Item item = new Item();
-            item.setId(element.get(0).toString().trim());
-            item.setName(element.get(1).toString().trim());
+            item.setId(gysInfo.getId());
+            item.setName(gysInfo.getName());
             if (items.contains(item))
                 continue;
             items.add(item);
