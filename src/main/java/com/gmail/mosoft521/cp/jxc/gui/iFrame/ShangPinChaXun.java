@@ -78,7 +78,7 @@ public class ShangPinChaXun extends JInternalFrame {
 		showAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				conditionContent.setText("");
-				List list = spInfoService.getSpInfos();
+				List<SpInfo> list = spInfoService.getSpInfos();
 				updateTable(list, dftm);
 			}
 		});
@@ -86,18 +86,11 @@ public class ShangPinChaXun extends JInternalFrame {
 		showAllButton.setText("显示全部");
 	}
 
-	private void updateTable(List list, final DefaultTableModel dftm) {
+	private void updateTable(List<SpInfo> list, final DefaultTableModel dftm) {
 		int num = dftm.getRowCount();
 		for (int i = 0; i < num; i++)
 			dftm.removeRow(0);
-		Iterator iterator = list.iterator();
-		SpInfo spInfo;
-		while (iterator.hasNext()) {
-			List info = (List) iterator.next();
-			Item item = new Item();
-			item.setId((String) info.get(0));
-			item.setName((String) info.get(1));
-			spInfo = spInfoService.getSpInfo(item);//再次查询
+		for(SpInfo spInfo: list) {
 			Vector rowData = new Vector();
 			rowData.add(spInfo.getId().trim());
 			rowData.add(spInfo.getSpname().trim());
