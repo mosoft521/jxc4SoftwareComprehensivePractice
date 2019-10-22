@@ -10,5 +10,11 @@ public interface SpInfoService {
 
     SpInfo getSpInfo(Item item);
 
-    List searchInfo(String conName, String conOperation, String content, List list);
+    List<SpInfo> searchInfo(String conName, String conOperation, String content, List list);
+
+    boolean existBySpname(String spname);
+
+    String selectMaxId();
+
+    int addSp(SpInfo spInfo);
 }

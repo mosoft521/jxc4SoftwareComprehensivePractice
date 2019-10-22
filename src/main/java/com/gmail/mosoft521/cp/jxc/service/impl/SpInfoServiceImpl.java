@@ -1,6 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.service.impl;
 
-import com.gmail.mosoft521.cp.jxc.dao.SpInfoMapper;
+import com.gmail.mosoft521.cp.jxc.dao.ext.SpInfoMapperExt;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfoExample;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
@@ -17,22 +17,22 @@ import java.util.List;
 public class SpInfoServiceImpl implements SpInfoService {
 
     @Autowired
-    private SpInfoMapper spInfoMapper;
+    private SpInfoMapperExt spInfoMapperExt;
 
     @Override
     public List<SpInfo> getSpInfos() {
-        return spInfoMapper.selectByExample(null);
+        return spInfoMapperExt.selectByExample(null);
     }
 
     @Override
     public SpInfo getSpInfo(Item item) {
         if (StringUtils.isNotBlank(item.getId())) {
-            return spInfoMapper.selectByPrimaryKey(item.getId());
+            return spInfoMapperExt.selectByPrimaryKey(item.getId());
         } else {
             SpInfoExample example = new SpInfoExample();
             SpInfoExample.Criteria criteria = example.createCriteria();
             criteria.andSpnameEqualTo(item.getName());
-            List<SpInfo> spInfoList = spInfoMapper.selectByExample(example);
+            List<SpInfo> spInfoList = spInfoMapperExt.selectByExample(example);
             if (spInfoList.isEmpty()) {
                 return null;
             } else {
@@ -42,7 +42,7 @@ public class SpInfoServiceImpl implements SpInfoService {
     }
 
     @Override
-    public List searchInfo(String conName, String conOperation, String content, List list) {
+    public List<SpInfo> searchInfo(String conName, String conOperation, String content, List list) {
         SpInfoExample example = new SpInfoExample();
         SpInfoExample.Criteria criteria = example.createCriteria();
         if (conOperation.equals("等于")) {
@@ -64,6 +64,32 @@ public class SpInfoServiceImpl implements SpInfoService {
             if (conName.equals("规格"))
                 criteria.andGgLike("%" + content + "%");
         }
-        return spInfoMapper.selectByExample(example);
+        return spInfoMapperExt.selectByExample(example);
+    }
+
+    @Override
+    public boolean existBySpname(String spname) {
+        SpInfoExample example = new SpInfoExample();
+        SpInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andSpnameEqualTo(spname);
+        List<SpInfo> spInfoList = spInfoMapperExt.selectByExample(example);
+        return !spInfoList.isEmpty();
+    }
+
+    @Override
+    public String selectMaxId() {
+        String id = "";
+        String maxId = spInfoMapperExt.selectMaxId();
+        if (StringUtils.isEmpty(maxId)) {
+            id += "1001";
+        } else {
+            id += (Integer.parseInt(maxId) + 1);
+        }
+        return id;
+    }
+
+    @Override
+    public int addSp(SpInfo spInfo) {
+        return spInfoMapperExt.insert(spInfo);
     }
 }
