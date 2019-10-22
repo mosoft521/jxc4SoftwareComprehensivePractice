@@ -11,4 +11,6 @@ public interface GysInfoService {
     boolean existQuanChengF(String quanCheng);
     int addGys(GysInfo gysInfo);
     String selectMaxId();
+    int updateGys(GysInfo gysInfo);
+    int deleteByPrimaryKey(String id);
 }

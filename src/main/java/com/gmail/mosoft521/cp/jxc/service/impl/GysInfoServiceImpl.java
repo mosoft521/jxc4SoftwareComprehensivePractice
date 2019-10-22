@@ -67,4 +67,14 @@ public class GysInfoServiceImpl implements GysInfoService {
         }
         return sid;
     }
+
+    @Override
+    public int updateGys(GysInfo gysInfo) {
+        return gysInfoMapperExt.updateByPrimaryKeySelective(gysInfo);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(String id) {
+        return gysInfoMapperExt.deleteByPrimaryKey(id);
+    }
 }
