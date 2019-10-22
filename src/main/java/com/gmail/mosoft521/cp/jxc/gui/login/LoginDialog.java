@@ -120,7 +120,7 @@ public class LoginDialog extends JFrame {
 	private JPasswordField getPswField() {
 		if(passwordField == null){
 			passwordField = new JPasswordField();
-			passwordField.setText("123456");
+			passwordField.setText("admin");
 			passwordField.setBounds(new Rectangle(150, 70, 100, 20));
 			passwordField.addKeyListener(new KeyListener() {
 				

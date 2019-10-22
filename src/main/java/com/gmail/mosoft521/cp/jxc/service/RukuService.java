@@ -1,6 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.service;
 
-import com.gmail.mosoft521.vo.RukuVO;
+import com.gmail.mosoft521.cp.jxc.vo.RukuVO;
 
 import java.util.Date;
 

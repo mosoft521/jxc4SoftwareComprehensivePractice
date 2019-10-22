@@ -7,7 +7,7 @@ import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
 import com.gmail.mosoft521.cp.jxc.service.RukuService;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
-import com.gmail.mosoft521.vo.RukuVO;
+import com.gmail.mosoft521.cp.jxc.vo.RukuVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

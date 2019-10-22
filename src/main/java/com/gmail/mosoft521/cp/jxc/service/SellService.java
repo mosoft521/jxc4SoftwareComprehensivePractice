@@ -1,6 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.service;
 
-import com.gmail.mosoft521.vo.SellVO;
+import com.gmail.mosoft521.cp.jxc.vo.SellVO;
 
 import java.util.Date;
 

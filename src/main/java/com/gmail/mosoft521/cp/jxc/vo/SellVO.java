@@ -1,4 +1,4 @@
-package com.gmail.mosoft521.vo;
+package com.gmail.mosoft521.cp.jxc.vo;
 
 import com.gmail.mosoft521.cp.jxc.entity.Sell;
 import com.gmail.mosoft521.cp.jxc.entity.SellDetail;

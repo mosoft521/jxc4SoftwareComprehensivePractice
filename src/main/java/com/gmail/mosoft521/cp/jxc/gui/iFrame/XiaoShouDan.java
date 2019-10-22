@@ -12,7 +12,7 @@ import com.gmail.mosoft521.cp.jxc.service.KhInfoService;
 import com.gmail.mosoft521.cp.jxc.service.KucunService;
 import com.gmail.mosoft521.cp.jxc.service.SellService;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
-import com.gmail.mosoft521.vo.SellVO;
+import com.gmail.mosoft521.cp.jxc.vo.SellVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;

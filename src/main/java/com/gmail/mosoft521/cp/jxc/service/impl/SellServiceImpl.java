@@ -6,7 +6,7 @@ import com.gmail.mosoft521.cp.jxc.entity.Sell;
 import com.gmail.mosoft521.cp.jxc.entity.SellDetail;
 import com.gmail.mosoft521.cp.jxc.entity.SellExample;
 import com.gmail.mosoft521.cp.jxc.service.SellService;
-import com.gmail.mosoft521.vo.SellVO;
+import com.gmail.mosoft521.cp.jxc.vo.SellVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

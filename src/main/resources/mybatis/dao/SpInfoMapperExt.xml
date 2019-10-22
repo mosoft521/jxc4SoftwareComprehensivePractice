@@ -7,7 +7,7 @@
 
     <select id="selectExistKucun" resultType="String">
         select
-        <include refid="Base_Column_List" />
+        <include refid="com.gmail.mosoft521.cp.jxc.dao.SpInfoMapper.Base_Column_List" />
         from tb_spinfo where id in (select id from tb_kucun where kcsl>0)
     </select>
 </mapper>
