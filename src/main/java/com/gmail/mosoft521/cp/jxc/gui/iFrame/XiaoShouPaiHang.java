@@ -150,7 +150,7 @@ public class XiaoShouPaiHang extends JInternalFrame {
 			String opstr = oper == 0 ? " asc" : " desc";
 			String queryStr = "select * from tb_spinfo s inner join (" + sql1
 					+ ") as sp on s.id=sp.spid order by " + con + opstr;
-			list = Dao.findForList(queryStr);
+//			list = Dao.findForList(queryStr);
 			Iterator iterator = list.iterator();
 			updateTable(iterator);
 		}

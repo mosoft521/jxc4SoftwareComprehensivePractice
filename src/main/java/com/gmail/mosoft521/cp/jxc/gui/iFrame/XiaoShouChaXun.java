@@ -111,9 +111,9 @@ public class XiaoShouChaXun extends JInternalFrame{
 		showAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				content.setText("");
-				List list=Dao.findForList("select * from v_sellView");//销售视图
-				Iterator iterator=list.iterator();
-				updateTable(iterator);
+//				List list=Dao.findForList("select * from v_sellView");//销售视图
+//				Iterator iterator=list.iterator();
+//				updateTable(iterator);
 			}
 		});
 		final GridBagConstraints gridBagConstraints_5 = new GridBagConstraints();
@@ -195,12 +195,12 @@ public class XiaoShouChaXun extends JInternalFrame{
 			int oper = operation.getSelectedIndex();
 			String opstr = oper == 0 ? "= " : "like ";
 			String cont = content.getText();
-			list = Dao.findForList("select * from v_sellView where "
-					+ con
-					+ opstr
-					+ (oper == 0 ? "'"+cont+"'" : "'%" + cont + "%'")
-					+ (selDate ? " and xsdate>'" + startDate.getText()
-							+ "' and xsdate<='" + endDate.getText()+" 23:59:59'" : ""));
+//			list = Dao.findForList("select * from v_sellView where "
+//					+ con
+//					+ opstr
+//					+ (oper == 0 ? "'"+cont+"'" : "'%" + cont + "%'")
+//					+ (selDate ? " and xsdate>'" + startDate.getText()
+//							+ "' and xsdate<='" + endDate.getText()+" 23:59:59'" : ""));
 			Iterator iterator = list.iterator();
 			updateTable(iterator);
 		}
