@@ -2,7 +2,9 @@ package com.gmail.mosoft521.cp.jxc.service.impl;
 
 import com.gmail.mosoft521.cp.jxc.dao.SellDetailMapper;
 import com.gmail.mosoft521.cp.jxc.dao.ext.SellMapperExt;
+import com.gmail.mosoft521.cp.jxc.entity.Sell;
 import com.gmail.mosoft521.cp.jxc.entity.SellDetail;
+import com.gmail.mosoft521.cp.jxc.entity.SellExample;
 import com.gmail.mosoft521.cp.jxc.service.SellService;
 import com.gmail.mosoft521.vo.SellVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("sellService")
 @Transactional
@@ -36,6 +39,13 @@ public class SellServiceImpl implements SellService {
 
     @Override
     public String getSellMainMaxId(Date date) {
-        return sellMapperExt.getSellMainMaxId(date);
+        String dateStr = date.toString().replace("-", "");
+        String id = "XS" + dateStr;
+        SellExample example = new SellExample();
+        SellExample.Criteria criteria = example.createCriteria();
+        criteria.andSellidLike(id + "%");
+        example.setOrderByClause("oder by sellID desc");
+        List<Sell> sellList = sellMapperExt.selectByExample(example);
+        return sellList.get(0).getSellid();
     }
 }
