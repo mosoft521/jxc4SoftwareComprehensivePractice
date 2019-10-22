@@ -1,6 +1,5 @@
 package com.gmail.mosoft521.cp.jxc.gui.iFrame.GysGuanli;
 
-
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.gui.KeyListener.InputKeyListener;
 import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
@@ -12,8 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class GysTianJiaPanel extends JPanel {
     private static Logger LOGGER = LoggerFactory.getLogger(GysTianJiaPanel.class);
@@ -110,21 +107,7 @@ public class GysTianJiaPanel extends JPanel {
                             JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                ResultSet set = Dao.query("select max(id) from tb_gysinfo");
-                String id = null;
-                try {
-                    if (set != null && set.next()) {
-                        String sid = set.getString(1).trim();
-                        if (sid == null)
-                            id = "gys1001";
-                        else {
-                            String str = sid.substring(3);
-                            id = "gys" + (Integer.parseInt(str) + 1);
-                        }
-                    }
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
+                String id = gysInfoService.selectMaxId();
                 GysInfo gysInfo = new GysInfo();
                 gysInfo.setId(id);
                 gysInfo.setAddress(diZhiF.getText().trim());

@@ -10,4 +10,5 @@ public interface GysInfoService {
     GysInfo getGysInfo(Item item);
     boolean existQuanChengF(String quanCheng);
     int addGys(GysInfo gysInfo);
+    String selectMaxId();
 }
