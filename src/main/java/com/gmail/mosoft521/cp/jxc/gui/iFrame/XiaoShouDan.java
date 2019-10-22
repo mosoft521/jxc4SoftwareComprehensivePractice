@@ -13,6 +13,7 @@ import com.gmail.mosoft521.cp.jxc.service.KucunService;
 import com.gmail.mosoft521.cp.jxc.service.SellService;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import com.gmail.mosoft521.cp.jxc.vo.SellVO;
+import com.gmail.mosoft521.cp.jxc.vo.SpInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -280,7 +281,7 @@ public class XiaoShouDan extends JInternalFrame {
     //
     private void initSpBox() {
         List list = new ArrayList();
-        List<SpInfo> spInfoList = spInfoService.selectExistKucun();
+        List<SpInfoVO> spInfoList = spInfoService.selectExistKucun();
         sp.removeAllItems();
         sp.addItem(new SpInfo());
         for (int i = 0; table != null && i < table.getRowCount(); i++) {

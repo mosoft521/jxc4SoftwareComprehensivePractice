@@ -2,15 +2,16 @@ package com.gmail.mosoft521.cp.jxc.service;
 
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.vo.SpInfoVO;
 
 import java.util.List;
 
 public interface SpInfoService {
-    List<SpInfo> getSpInfos();
+    List<SpInfoVO> getSpInfos();
 
     SpInfo getSpInfo(Item item);
 
-    List<SpInfo> searchInfo(String conName, String conOperation, String content, List list);
+    List<SpInfoVO> searchInfo(String conName, String conOperation, String content, List list);
 
     boolean existBySpname(String spname);
 
@@ -22,7 +23,7 @@ public interface SpInfoService {
 
     int updateSp(SpInfo spInfo);
 
-    List<SpInfo> selectExistKucun();
+    List<SpInfoVO> selectExistKucun();
 
-    List<SpInfo> selectByGysName(String gysName);
+    List<SpInfoVO> selectByGysName(String gysName);
 }

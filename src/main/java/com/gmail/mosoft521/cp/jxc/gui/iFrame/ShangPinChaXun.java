@@ -3,6 +3,7 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
+import com.gmail.mosoft521.cp.jxc.vo.SpInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -78,7 +79,7 @@ public class ShangPinChaXun extends JInternalFrame {
 		showAllButton.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				conditionContent.setText("");
-				List<SpInfo> list = spInfoService.getSpInfos();
+				List<SpInfoVO> list = spInfoService.getSpInfos();
 				updateTable(list, dftm);
 			}
 		});
@@ -86,7 +87,7 @@ public class ShangPinChaXun extends JInternalFrame {
 		showAllButton.setText("显示全部");
 	}
 
-	private void updateTable(List<SpInfo> list, final DefaultTableModel dftm) {
+	private void updateTable(List<SpInfoVO> list, final DefaultTableModel dftm) {
 		int num = dftm.getRowCount();
 		for (int i = 0; i < num; i++)
 			dftm.removeRow(0);

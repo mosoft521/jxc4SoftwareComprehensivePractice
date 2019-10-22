@@ -5,11 +5,14 @@ import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfoExample;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
+import com.gmail.mosoft521.cp.jxc.vo.SpInfoVO;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("spInfoService")
@@ -20,8 +23,16 @@ public class SpInfoServiceImpl implements SpInfoService {
     private SpInfoMapperExt spInfoMapperExt;
 
     @Override
-    public List<SpInfo> getSpInfos() {
-        return spInfoMapperExt.selectByExample(null);
+    public List<SpInfoVO> getSpInfos() {
+        List<SpInfo> spInfoList = spInfoMapperExt.selectByExample(null);
+        List<SpInfoVO> spInfoVOList = new ArrayList<>();
+        for (SpInfo spInfo : spInfoList) {
+            SpInfoVO spInfoVO = new SpInfoVO();
+            BeanUtils.copyProperties(spInfo, spInfoVO);
+            spInfoVO.setName(spInfo.getSpname());
+            spInfoVOList.add(spInfoVO);
+        }
+        return spInfoVOList;
     }
 
     @Override
@@ -42,7 +53,7 @@ public class SpInfoServiceImpl implements SpInfoService {
     }
 
     @Override
-    public List<SpInfo> searchInfo(String conName, String conOperation, String content, List list) {
+    public List<SpInfoVO> searchInfo(String conName, String conOperation, String content, List list) {
         SpInfoExample example = new SpInfoExample();
         SpInfoExample.Criteria criteria = example.createCriteria();
         if (conOperation.equals("等于")) {
@@ -64,7 +75,15 @@ public class SpInfoServiceImpl implements SpInfoService {
             if (conName.equals("规格"))
                 criteria.andGgLike("%" + content + "%");
         }
-        return spInfoMapperExt.selectByExample(example);
+        List<SpInfo> spInfoList = spInfoMapperExt.selectByExample(example);
+        List<SpInfoVO> spInfoVOList = new ArrayList<>();
+        for (SpInfo spInfo : spInfoList) {
+            SpInfoVO spInfoVO = new SpInfoVO();
+            BeanUtils.copyProperties(spInfo, spInfoVO);
+            spInfoVO.setName(spInfo.getSpname());
+            spInfoVOList.add(spInfoVO);
+        }
+        return spInfoVOList;
     }
 
     @Override
@@ -104,16 +123,31 @@ public class SpInfoServiceImpl implements SpInfoService {
     }
 
     @Override
-    public List<SpInfo> selectExistKucun() {
-        return spInfoMapperExt.selectExistKucun();
+    public List<SpInfoVO> selectExistKucun() {
+        List<SpInfo> spInfoList = spInfoMapperExt.selectExistKucun();
+        List<SpInfoVO> spInfoVOList = new ArrayList<>();
+        for (SpInfo spInfo : spInfoList) {
+            SpInfoVO spInfoVO = new SpInfoVO();
+            BeanUtils.copyProperties(spInfo, spInfoVO);
+            spInfoVO.setName(spInfo.getSpname());
+            spInfoVOList.add(spInfoVO);
+        }
+        return spInfoVOList;
     }
 
     @Override
-    public List<SpInfo> selectByGysName(String gysName) {
+    public List<SpInfoVO> selectByGysName(String gysName) {
         SpInfoExample example = new SpInfoExample();
         SpInfoExample.Criteria criteria = example.createCriteria();
         criteria.andGysnameEqualTo(gysName);
         List<SpInfo> spInfoList = spInfoMapperExt.selectByExample(example);
-        return spInfoList;
+        List<SpInfoVO> spInfoVOList = new ArrayList<>();
+        for (SpInfo spInfo : spInfoList) {
+            SpInfoVO spInfoVO = new SpInfoVO();
+            BeanUtils.copyProperties(spInfo, spInfoVO);
+            spInfoVO.setName(spInfo.getSpname());
+            spInfoVOList.add(spInfoVO);
+        }
+        return spInfoVOList;
     }
 }

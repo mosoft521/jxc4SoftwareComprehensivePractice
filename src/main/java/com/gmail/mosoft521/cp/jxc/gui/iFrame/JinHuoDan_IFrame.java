@@ -8,6 +8,7 @@ import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
 import com.gmail.mosoft521.cp.jxc.service.RukuService;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import com.gmail.mosoft521.cp.jxc.vo.RukuVO;
+import com.gmail.mosoft521.cp.jxc.vo.SpInfoVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -211,7 +212,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 
 						spComboBox.removeAllItems();
 //						spComboBox.addItem(new SpInfo());
-						List<SpInfo> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
+						List<SpInfoVO> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
 						System.out.println("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
 						updateSpComboBox(spInfoList);
 
@@ -447,7 +448,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 					}
 					spComboBox.removeAllItems();
 //					spComboBox.addItem(new SpInfo());
-					List<SpInfo> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
+					List<SpInfoVO> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
 					System.out.println("更新商品："+"select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
 					updateSpComboBox(spInfoList);
 				}
@@ -484,7 +485,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 		}
 	}
 
-	protected void updateSpComboBox(List<SpInfo> spInfoList) {
+	protected void updateSpComboBox(List<SpInfoVO> spInfoList) {
 		//判断原来表中已有的商品
 		for(int i = 0 ; table != null && i <table.getRowCount() ; i++ ){
 			SpInfo spinfo1 =(SpInfo)table.getValueAt(i, 0);

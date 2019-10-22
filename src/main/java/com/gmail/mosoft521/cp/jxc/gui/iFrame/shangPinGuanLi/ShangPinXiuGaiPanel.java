@@ -5,6 +5,7 @@ import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
 import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
 import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
+import com.gmail.mosoft521.cp.jxc.vo.SpInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -149,7 +150,7 @@ public class ShangPinXiuGaiPanel extends JPanel {
 	}
 	//初始化商品栏
 	public void initComboBox() {
-		List<SpInfo> spInfoList = spInfoService.getSpInfos();
+		List<SpInfoVO> spInfoList = spInfoService.getSpInfos();
 		List<Item> items = new ArrayList<Item>();//排重用，待优化
 		sp.removeAllItems();
 		for (SpInfo spInfo : spInfoList) {
