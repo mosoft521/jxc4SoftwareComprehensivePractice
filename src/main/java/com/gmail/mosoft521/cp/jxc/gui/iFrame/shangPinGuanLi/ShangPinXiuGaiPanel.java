@@ -3,6 +3,8 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.shangPinGuanLi;
 import com.gmail.mosoft521.cp.jxc.entity.GysInfo;
 import com.gmail.mosoft521.cp.jxc.entity.SpInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.service.GysInfoService;
+import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -19,6 +21,8 @@ public class ShangPinXiuGaiPanel extends JPanel {
 	private static Logger LOGGER = LoggerFactory.getLogger(ShangPinXiuGaiPanel.class);
 
 	private ApplicationContext context;
+	private SpInfoService spInfoService;
+	private GysInfoService gysInfoService;
 
 	private JComboBox gysQuanCheng;
 	private JTextField beiZhu;
@@ -35,6 +39,8 @@ public class ShangPinXiuGaiPanel extends JPanel {
 	private JComboBox sp;
 	public ShangPinXiuGaiPanel(ApplicationContext context) {
 		this.context = context;
+		this.spInfoService = context.getBean("spInfoService", SpInfoService.class);
+		this.gysInfoService = context.getBean("gysInfoService", GysInfoService.class);
 		setLayout(new GridBagLayout());
 		setBounds(10, 10, 550, 400);
 
@@ -106,8 +112,7 @@ public class ShangPinXiuGaiPanel extends JPanel {
 				int confirm = JOptionPane.showConfirmDialog(
 						ShangPinXiuGaiPanel.this, "确认删除");
 				if (confirm == JOptionPane.YES_OPTION) {
-					int rs = Dao.delete("delete from tb_spinfo where id='"
-							+ item.getId() + "'");
+					int rs = spInfoService.deleteByPk(item.getId());
 					if (rs > 0) {
 						JOptionPane.showMessageDialog(ShangPinXiuGaiPanel.this,
 								"商品" + item.getName() + "信息删除成功");
@@ -133,7 +138,7 @@ public class ShangPinXiuGaiPanel extends JPanel {
 				spInfo.setPh(piHao.getText().trim());
 				spInfo.setPzwh(wenHao.getText().trim());
 				spInfo.setSpname(quanCheng.getText().trim());
-				if (Dao.updateSp(spInfo) == 1)
+				if (spInfoService.updateSp(spInfo) == 1)
 					JOptionPane.showMessageDialog(ShangPinXiuGaiPanel.this,
 							"更新成功");
 				else
@@ -144,7 +149,7 @@ public class ShangPinXiuGaiPanel extends JPanel {
 	}
 	//初始化商品栏
 	public void initComboBox() {
-		List khInfo = Dao.getSpInfos();
+		List khInfo = spInfoService.getSpInfos();
 		List<Item> items = new ArrayList<Item>();
 		sp.removeAllItems();
 		for (Iterator iter = khInfo.iterator(); iter.hasNext();) {
@@ -160,14 +165,13 @@ public class ShangPinXiuGaiPanel extends JPanel {
 		doSpSelectAction();
 	}
 	public void initGysBox() {
-		List gysInfo = Dao.getGysInfos();
-		List<Item> items = new ArrayList<Item>();
+		List<GysInfo> gysInfoList = gysInfoService.getGysInfos();
+		List<Item> items = new ArrayList<Item>();//排重用，待优化
 		gysQuanCheng.removeAllItems();
-		for (Iterator iter = gysInfo.iterator(); iter.hasNext();) {
-			List element = (List) iter.next();
+		for (GysInfo gysInfo1:gysInfoList) {
 			Item item = new Item();
-			item.setId(element.get(0).toString().trim());
-			item.setName(element.get(1).toString().trim());
+			item.setId(gysInfo1.getId());
+			item.setName(gysInfo1.getName());
 			if (items.contains(item))
 				continue;
 			items.add(item);
@@ -196,7 +200,7 @@ public class ShangPinXiuGaiPanel extends JPanel {
 			return;
 		}
 		selectedItem = (Item) sp.getSelectedItem();
-		SpInfo spInfo = Dao.getSpInfo(selectedItem);
+		SpInfo spInfo = spInfoService.getSpInfo(selectedItem);
 		if (!spInfo.getId().isEmpty()) {
 			quanCheng.setText(spInfo.getSpname());
 			baoZhuang.setText(spInfo.getBz());
@@ -211,7 +215,7 @@ public class ShangPinXiuGaiPanel extends JPanel {
 			Item item = new Item();
 			item.setId(null);
 			item.setName(spInfo.getGysname());
-			GysInfo gysInfo = Dao.getGysInfo(item);
+			GysInfo gysInfo = gysInfoService.getGysInfo(item);
 			item.setId(gysInfo.getId());
 			item.setName(gysInfo.getName());
 			for (int i = 0; i < gysQuanCheng.getItemCount(); i++) {

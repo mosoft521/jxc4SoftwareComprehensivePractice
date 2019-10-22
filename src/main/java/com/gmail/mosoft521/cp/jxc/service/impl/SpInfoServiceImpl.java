@@ -92,4 +92,14 @@ public class SpInfoServiceImpl implements SpInfoService {
     public int addSp(SpInfo spInfo) {
         return spInfoMapperExt.insert(spInfo);
     }
+
+    @Override
+    public int deleteByPk(String id) {
+        return spInfoMapperExt.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateSp(SpInfo spInfo) {
+        return spInfoMapperExt.updateByPrimaryKeySelective(spInfo);
+    }
 }

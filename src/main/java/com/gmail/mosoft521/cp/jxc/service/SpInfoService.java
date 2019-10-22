@@ -17,4 +17,8 @@ public interface SpInfoService {
     String selectMaxId();
 
     int addSp(SpInfo spInfo);
+
+    int deleteByPk(String id);
+
+    int updateSp(SpInfo spInfo);
 }
