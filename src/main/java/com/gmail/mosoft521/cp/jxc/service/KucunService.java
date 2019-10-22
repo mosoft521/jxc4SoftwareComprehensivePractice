@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface KucunService {
     List<Kucun> getKucunInfos();
+
     int updateKucunDj(Kucun kucun);
+
     Kucun getKucun(Item item);
 }

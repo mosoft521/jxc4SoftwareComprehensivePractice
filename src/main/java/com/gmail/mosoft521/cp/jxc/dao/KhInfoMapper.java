@@ -4,9 +4,7 @@ import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.entity.KhInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface KhInfoMapper {
     long countByExample(KhInfoExample example);
 

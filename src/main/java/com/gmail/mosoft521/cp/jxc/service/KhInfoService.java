@@ -7,5 +7,12 @@ import java.util.List;
 
 public interface KhInfoService {
     List<KhInfo> getKhInfos();
+
     KhInfo getKhInfo(Item item);
+
+    boolean existByKhname(String name);
+
+    String selectMaxId();
+
+    int addKeHu(KhInfo khInfo);
 }

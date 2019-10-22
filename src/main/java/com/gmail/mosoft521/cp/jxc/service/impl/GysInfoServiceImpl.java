@@ -57,15 +57,15 @@ public class GysInfoServiceImpl implements GysInfoService {
 
     @Override
     public String selectMaxId() {
-        String sid = "gys";
+        String id = "gys";
         String maxId = gysInfoMapperExt.selectMaxId();
-        if(StringUtils.isEmpty(maxId)){
-            sid += "1001";
+        if (StringUtils.isEmpty(maxId)) {
+            id += "1001";
         } else {
             String str = maxId.substring(3);
-            sid += (Integer.parseInt(str) + 1);
+            id += (Integer.parseInt(str) + 1);
         }
-        return sid;
+        return id;
     }
 
     @Override

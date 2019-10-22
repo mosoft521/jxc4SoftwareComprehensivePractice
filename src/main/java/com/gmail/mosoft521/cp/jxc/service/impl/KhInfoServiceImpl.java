@@ -1,6 +1,6 @@
 package com.gmail.mosoft521.cp.jxc.service.impl;
 
-import com.gmail.mosoft521.cp.jxc.dao.KhInfoMapper;
+import com.gmail.mosoft521.cp.jxc.dao.ext.KhInfoMapperExt;
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.entity.KhInfoExample;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
@@ -16,27 +16,54 @@ import java.util.List;
 @Transactional
 public class KhInfoServiceImpl implements KhInfoService {
     @Autowired
-    private KhInfoMapper khInfoMapper;
+    private KhInfoMapperExt khInfoMapperExt;
 
     @Override
     public List<KhInfo> getKhInfos() {
-        return khInfoMapper.selectByExample(null);
+        return khInfoMapperExt.selectByExample(null);
     }
 
     @Override
     public KhInfo getKhInfo(Item item) {
         if (StringUtils.isNotBlank(item.getId())) {
-            return khInfoMapper.selectByPrimaryKey(item.getId());
+            return khInfoMapperExt.selectByPrimaryKey(item.getId());
         } else {
             KhInfoExample example = new KhInfoExample();
             KhInfoExample.Criteria criteria = example.createCriteria();
             criteria.andKhnameEqualTo(item.getName());
-            List<KhInfo> khInfoList = khInfoMapper.selectByExample(example);
+            List<KhInfo> khInfoList = khInfoMapperExt.selectByExample(example);
             if (khInfoList.isEmpty()) {
                 return null;
             } else {
                 return khInfoList.get(0);
             }
         }
+    }
+
+    @Override
+    public boolean existByKhname(String name) {
+        KhInfoExample example = new KhInfoExample();
+        KhInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andKhnameEqualTo(name);
+        List<KhInfo> khInfoList = khInfoMapperExt.selectByExample(example);
+        return !khInfoList.isEmpty();
+    }
+
+    @Override
+    public String selectMaxId() {
+        String id = "kh";
+        String maxId = khInfoMapperExt.selectMaxId();
+        if (StringUtils.isEmpty(maxId)) {
+            id += "1001";
+        } else {
+            String str = maxId.substring(2);
+            id += (Integer.parseInt(str) + 1);
+        }
+        return id;
+    }
+
+    @Override
+    public int addKeHu(KhInfo khInfo) {
+        return khInfoMapperExt.insert(khInfo);
     }
 }

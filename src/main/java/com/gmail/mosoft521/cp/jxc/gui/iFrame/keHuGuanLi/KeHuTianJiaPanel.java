@@ -2,6 +2,7 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.keHuGuanLi;
 
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.gui.KeyListener.InputKeyListener;
+import com.gmail.mosoft521.cp.jxc.service.KhInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -10,14 +11,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 
 public class KeHuTianJiaPanel extends JPanel {
 	private static Logger LOGGER = LoggerFactory.getLogger(KeHuTianJiaPanel.class);
 
 	private ApplicationContext context;
+	private KhInfoService khInfoService;
 
 	private JTextField keHuQuanCheng;
 	private JTextField yinHangZhangHao;
@@ -34,6 +34,7 @@ public class KeHuTianJiaPanel extends JPanel {
 	public KeHuTianJiaPanel(ApplicationContext context) {
 		super();
 		this.context = context;
+		this.khInfoService = context.getBean("khInfoService", KhInfoService.class);
 		setBounds(10, 10, 460, 300);
 		setLayout(new GridBagLayout());
 		setVisible(true);
@@ -124,35 +125,15 @@ public class KeHuTianJiaPanel extends JPanel {
 				JOptionPane.showMessageDialog(null, "有信息为空，请补全信息！");
 				return;
 			}
-			ResultSet haveUser = Dao
-					.query("select * from tb_khinfo where khname='"
-							+ keHuQuanCheng.getText().trim() + "'");
-			try {
-				if (haveUser.next()){
+			boolean exist = khInfoService.existByKhname(keHuQuanCheng.getText().trim());
+				if (exist){
 					System.out.println("error");
 					JOptionPane.showMessageDialog(KeHuTianJiaPanel.this,
 							"客户信息已存在", "错误信息",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-			} catch (Exception er) {
-				er.printStackTrace();
-			}
-			ResultSet set = Dao.query("select max(id) from tb_khinfo");
-			String id = null;
-			try {
-				if (set != null && set.next()) {
-					String sid = set.getString(1);
-					if (sid == null)
-						id = "kh1001";
-					else {
-						String str = sid.substring(2);
-						id = "kh" + (Integer.parseInt(str) + 1);
-					}
-				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			String id = khInfoService.selectMaxId();
 			KhInfo khinfo = new KhInfo();
 			khinfo.setId(id);
 			khinfo.setAddress(diZhi.getText().trim());
@@ -166,7 +147,7 @@ public class KeHuTianJiaPanel extends JPanel {
 			khinfo.setMail(EMail.getText().trim());
 			khinfo.setTel(dianHua.getText().trim());
 			khinfo.setXinhang(kaiHuYinHang.getText());
-			Dao.addKeHu(khinfo);
+			khInfoService.addKeHu(khinfo);
 			JOptionPane.showMessageDialog(KeHuTianJiaPanel.this, "添加成功",
 					"信息提示", JOptionPane.INFORMATION_MESSAGE);
 			resetButton.doClick();

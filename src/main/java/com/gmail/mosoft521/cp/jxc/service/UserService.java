@@ -16,7 +16,7 @@ public interface UserService {
      * 用户登录的方法, 如果登录失败，则抛出BusinessException
      *
      * @param oldPassStr 旧密码
-     * @param newPassStr     新密码
+     * @param newPassStr 新密码
      */
     int modifyPassword(String oldPassStr, String newPassStr);
 }
