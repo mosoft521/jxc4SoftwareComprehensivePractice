@@ -5,7 +5,7 @@
         select max(id) from tb_spinfo
     </select>
 
-    <select id="selectExistKucun" resultType="String">
+    <select id="selectExistKucun" resultMap="com.gmail.mosoft521.cp.jxc.dao.SpInfoMapper.BaseResultMap">
         select
         <include refid="com.gmail.mosoft521.cp.jxc.dao.SpInfoMapper.Base_Column_List" />
         from tb_spinfo where id in (select id from tb_kucun where kcsl>0)

@@ -44,8 +44,12 @@ public class SellServiceImpl implements SellService {
         SellExample example = new SellExample();
         SellExample.Criteria criteria = example.createCriteria();
         criteria.andSellidLike(id + "%");
-        example.setOrderByClause("oder by sellID desc");
+        example.setOrderByClause("sellID desc");
         List<Sell> sellList = sellMapperExt.selectByExample(example);
-        return sellList.get(0).getSellid();
+        if(sellList.isEmpty()) {
+            return null;
+        } else {
+            return sellList.get(0).getSellid();
+        }
     }
 }
