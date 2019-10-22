@@ -66,4 +66,14 @@ public class KhInfoServiceImpl implements KhInfoService {
     public int addKeHu(KhInfo khInfo) {
         return khInfoMapperExt.insert(khInfo);
     }
+
+    @Override
+    public int deleteByPrimaryKey(String id) {
+        return khInfoMapperExt.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateKeHu(KhInfo khInfo) {
+        return khInfoMapperExt.updateByPrimaryKeySelective(khInfo);
+    }
 }

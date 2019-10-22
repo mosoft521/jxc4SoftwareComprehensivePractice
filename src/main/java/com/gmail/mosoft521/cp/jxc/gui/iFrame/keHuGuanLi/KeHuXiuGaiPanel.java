@@ -2,6 +2,7 @@ package com.gmail.mosoft521.cp.jxc.gui.iFrame.keHuGuanLi;
 
 import com.gmail.mosoft521.cp.jxc.entity.KhInfo;
 import com.gmail.mosoft521.cp.jxc.javaBean.Item;
+import com.gmail.mosoft521.cp.jxc.service.KhInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -16,11 +17,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class KeHuXiuGaiPanel extends JPanel {
 	private static Logger LOGGER = LoggerFactory.getLogger(KeHuXiuGaiPanel.class);
 
 	private ApplicationContext context;
+	private KhInfoService khInfoService;
 
 	private JTextField keHuQuanCheng;
 	private JTextField yinHangZhangHao;
@@ -38,6 +39,7 @@ public class KeHuXiuGaiPanel extends JPanel {
 	private JComboBox kehu;
 	public KeHuXiuGaiPanel(ApplicationContext context) {
 		this.context = context;
+		this.khInfoService = context.getBean("khInfoService", KhInfoService.class);
 		setBounds(10, 10, 460, 300);
 		setLayout(new GridBagLayout());
 		setVisible(true);
@@ -133,8 +135,7 @@ public class KeHuXiuGaiPanel extends JPanel {
 				int confirm = JOptionPane.showConfirmDialog(
 						KeHuXiuGaiPanel.this, "确认删除？");
 				if (confirm == JOptionPane.YES_OPTION) {
-					int rs = Dao.delete("delete from tb_khinfo where id='"
-							+ item.getId() + "'");
+					int rs = khInfoService.deleteByPrimaryKey(item.getId());
 					if (rs > 0) {
 						JOptionPane.showMessageDialog(KeHuXiuGaiPanel.this,
 								"客户" + item.getName() + "删除成功");
@@ -160,7 +161,7 @@ public class KeHuXiuGaiPanel extends JPanel {
 				khinfo.setMail(EMail.getText().trim());
 				khinfo.setTel(dianHua.getText().trim());
 				khinfo.setXinhang(kaiHuYinHang.getText());
-				if (Dao.updateKeHu(khinfo) == 1)
+				if (khInfoService.updateKeHu(khinfo) == 1)
 					JOptionPane.showMessageDialog(KeHuXiuGaiPanel.this, "更新成功！");
 				else
 					JOptionPane.showMessageDialog(KeHuXiuGaiPanel.this, "更新失败！");
@@ -169,7 +170,7 @@ public class KeHuXiuGaiPanel extends JPanel {
 	}
 
 	public void initComboBox() {
-		List khInfo = Dao.getKhInfos();
+		List khInfo = khInfoService.getKhInfos();
 		List<Item> items = new ArrayList<Item>();
 		kehu.removeAllItems();
 		for (Iterator iter = khInfo.iterator(); iter.hasNext();) {
@@ -205,7 +206,7 @@ public class KeHuXiuGaiPanel extends JPanel {
 			return;
 		}
 		selectedItem = (Item) kehu.getSelectedItem();
-		KhInfo khInfo = Dao.getKhInfo(selectedItem);
+		KhInfo khInfo = khInfoService.getKhInfo(selectedItem);
 		keHuQuanCheng.setText(khInfo.getKhname());
 		diZhi.setText(khInfo.getAddress());
 		keHuJianCheng.setText(khInfo.getJian());
