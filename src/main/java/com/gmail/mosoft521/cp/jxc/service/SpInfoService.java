@@ -21,4 +21,6 @@ public interface SpInfoService {
     int deleteByPk(String id);
 
     int updateSp(SpInfo spInfo);
+
+    List<SpInfo> selectExistKucun();
 }

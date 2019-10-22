@@ -102,4 +102,9 @@ public class SpInfoServiceImpl implements SpInfoService {
     public int updateSp(SpInfo spInfo) {
         return spInfoMapperExt.updateByPrimaryKeySelective(spInfo);
     }
+
+    @Override
+    public List<SpInfo> selectExistKucun() {
+        return spInfoMapperExt.selectExistKucun();
+    }
 }

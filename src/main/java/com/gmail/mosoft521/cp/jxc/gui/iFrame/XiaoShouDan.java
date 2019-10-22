@@ -12,6 +12,7 @@ import com.gmail.mosoft521.cp.jxc.service.JsrService;
 import com.gmail.mosoft521.cp.jxc.service.KhInfoService;
 import com.gmail.mosoft521.cp.jxc.service.KucunService;
 import com.gmail.mosoft521.cp.jxc.service.SellService;
+import com.gmail.mosoft521.cp.jxc.service.SpInfoService;
 import com.gmail.mosoft521.vo.SellVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,7 @@ public class XiaoShouDan extends JInternalFrame {
     private JsrService jsrService;
     private KhInfoService khInfoService;
     private KucunService kucunService;
+    private SpInfoService spInfoService;
 
     private final JTable table;
 
@@ -86,6 +88,7 @@ public class XiaoShouDan extends JInternalFrame {
         this.jsrService = context.getBean("jsrService", JsrService.class);
         this.khInfoService = context.getBean("khInfoService", KhInfoService.class);
         this.kucunService = context.getBean("kucunService", KucunService.class);
+        this.spInfoService = context.getBean("spInfoService", SpInfoService.class);
         setMaximizable(true);
         setIconifiable(true);
         setClosable(true);
@@ -281,8 +284,7 @@ public class XiaoShouDan extends JInternalFrame {
     //
     private void initSpBox() {
         List list = new ArrayList();
-        ResultSet set = Dao.query(" select * from tb_spinfo"
-                + " where id in (select id from tb_kucun where kcsl>0)");
+        List<SpInfo> spInfoList = spInfoService.selectExistKucun();
         sp.removeAllItems();
         sp.addItem(new SpInfo());
         for (int i = 0; table != null && i < table.getRowCount(); i++) {
@@ -290,27 +292,8 @@ public class XiaoShouDan extends JInternalFrame {
             if (tmpInfo != null && tmpInfo.getId() != null)
                 list.add(tmpInfo.getId());
         }
-        try {
-            while (set.next()) {
-                SpInfo spinfo = new SpInfo();
-                spinfo.setId(set.getString("id").trim());
-                //
-                if (list.contains(spinfo.getId()))
-                    continue;
-                spinfo.setSpname(set.getString("spname").trim());
-                spinfo.setCd(set.getString("cd").trim());
-                spinfo.setJc(set.getString("jc").trim());
-                spinfo.setDw(set.getString("dw").trim());
-                spinfo.setGg(set.getString("gg").trim());
-                spinfo.setBz(set.getString("bz").trim());
-                spinfo.setPh(set.getString("ph").trim());
-                spinfo.setPzwh(set.getString("pzwh").trim());
-                spinfo.setMemo(set.getString("memo").trim());
-                spinfo.setGysname(set.getString("gysname").trim());
-                sp.addItem(spinfo);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for(SpInfo spInfo:spInfoList){
+            sp.addItem(spInfo);
         }
     }
 
@@ -411,7 +394,7 @@ public class XiaoShouDan extends JInternalFrame {
 
     private void initPiaoHao() {
         java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
-        String maxId = Dao.getSellMainMaxId(date);
+        String maxId = sellService.getSellMainMaxId(date);
         piaoHao.setText(maxId);
     }
 

@@ -4,4 +4,10 @@
     <select id="selectMaxId" resultType="String">
         select max(id) from tb_spinfo
     </select>
+
+    <select id="getSellMainMaxId" resultType="String">
+        select
+        <include refid="Base_Column_List" />
+        from tb_spinfo where id in (select id from tb_kucun where kcsl>0)
+    </select>
 </mapper>
