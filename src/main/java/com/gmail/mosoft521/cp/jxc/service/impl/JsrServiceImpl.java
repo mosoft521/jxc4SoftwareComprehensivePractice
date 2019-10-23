@@ -36,6 +36,8 @@ public class JsrServiceImpl implements JsrService {
     public Jsr getJsr(String nameStr, String ageStr) {
         JsrExample jsrExample = new JsrExample();
         JsrExample.Criteria criteria = jsrExample.createCriteria();
+        criteria.andNameEqualTo(nameStr);
+        criteria.andAgeEqualTo(ageStr);
         List<Jsr> jsrs = jsrMapperExt.selectByExample(jsrExample);
         if (jsrs.isEmpty()) {
             return null;
@@ -46,6 +48,7 @@ public class JsrServiceImpl implements JsrService {
 
     @Override
     public int addJsr(Jsr jsr) {
+        jsr.setEnable(1);
         return jsrMapperExt.insertSelective(jsr);
     }
 }

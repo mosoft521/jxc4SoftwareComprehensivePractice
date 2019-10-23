@@ -113,7 +113,7 @@ public class TJJingShouRen extends JPanel {
 					return;
 				String ageStr = new String(age.getText());
 				Jsr user = jsrService.getJsr(nameStr, ageStr);
-				if (user.getSex() != null && !user.getSex().isEmpty()) {
+				if (null != user && user.getSex() != null && !user.getSex().isEmpty()) {
 					JOptionPane.showMessageDialog(TJJingShouRen.this, "经手人("
 							+ user.getName() + ")已存在！");
 					sex.setFocusable(true);
