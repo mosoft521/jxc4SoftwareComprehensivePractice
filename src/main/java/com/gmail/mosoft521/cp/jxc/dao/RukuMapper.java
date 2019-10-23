@@ -4,7 +4,9 @@ import com.gmail.mosoft521.cp.jxc.entity.Ruku;
 import com.gmail.mosoft521.cp.jxc.entity.RukuExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RukuMapper {
     long countByExample(RukuExample example);
 

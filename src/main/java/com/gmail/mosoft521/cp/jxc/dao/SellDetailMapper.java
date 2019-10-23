@@ -4,7 +4,9 @@ import com.gmail.mosoft521.cp.jxc.entity.SellDetail;
 import com.gmail.mosoft521.cp.jxc.entity.SellDetailExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SellDetailMapper {
     long countByExample(SellDetailExample example);
 
