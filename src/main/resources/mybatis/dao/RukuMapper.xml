@@ -104,9 +104,6 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.Ruku">
-    <selectKey keyProperty="rkid" order="BEFORE" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_ruku_main (rkID, pzs, je, ysjl, 
       gysname, rkdate, czy, 
       jsr, jsfs)
@@ -115,12 +112,11 @@
       #{jsr,jdbcType=VARCHAR}, #{jsfs,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.Ruku">
-    <selectKey keyProperty="rkid" order="BEFORE" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_ruku_main
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      rkID,
+      <if test="rkid != null">
+        rkID,
+      </if>
       <if test="pzs != null">
         pzs,
       </if>
@@ -147,7 +143,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{rkid,jdbcType=VARCHAR},
+      <if test="rkid != null">
+        #{rkid,jdbcType=VARCHAR},
+      </if>
       <if test="pzs != null">
         #{pzs,jdbcType=REAL},
       </if>

@@ -100,21 +100,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.RukuDetail">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tb_ruku_detail (id, rkID, spid, 
-      dj, sl)
-    values (#{id,jdbcType=VARCHAR}, #{rkid,jdbcType=VARCHAR}, #{spid,jdbcType=VARCHAR}, 
-      #{dj,jdbcType=VARCHAR}, #{sl,jdbcType=REAL})
+    insert into tb_ruku_detail (rkID, spid, dj, 
+      sl)
+    values (#{rkid,jdbcType=VARCHAR}, #{spid,jdbcType=VARCHAR}, #{dj,jdbcType=VARCHAR}, 
+      #{sl,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.RukuDetail">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into tb_ruku_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
       <if test="rkid != null">
         rkID,
       </if>
@@ -129,7 +128,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=VARCHAR},
       <if test="rkid != null">
         #{rkid,jdbcType=VARCHAR},
       </if>

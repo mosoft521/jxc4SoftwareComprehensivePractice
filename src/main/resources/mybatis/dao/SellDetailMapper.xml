@@ -100,21 +100,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.SellDetail">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tb_sell_detail (id, sellID, spid, 
-      dj, sl)
-    values (#{id,jdbcType=INTEGER}, #{sellid,jdbcType=VARCHAR}, #{spid,jdbcType=VARCHAR}, 
-      #{dj,jdbcType=REAL}, #{sl,jdbcType=REAL})
+    insert into tb_sell_detail (sellID, spid, dj, 
+      sl)
+    values (#{sellid,jdbcType=VARCHAR}, #{spid,jdbcType=VARCHAR}, #{dj,jdbcType=REAL}, 
+      #{sl,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.SellDetail">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into tb_sell_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
       <if test="sellid != null">
         sellID,
       </if>
@@ -129,7 +128,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=INTEGER},
       <if test="sellid != null">
         #{sellid,jdbcType=VARCHAR},
       </if>

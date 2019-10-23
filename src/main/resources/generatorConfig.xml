@@ -69,23 +69,19 @@
         <!--        <table schema="" tableName="common_xzqh_tree_path" domainObjectName="CommonXzqhTreePath">-->
         <!--        </table>-->
         <table schema="" tableName="tb_gysinfo" domainObjectName="GysInfo">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table schema="" tableName="tb_ruku_main" domainObjectName="Ruku">
-            <generatedKey column="rkID" sqlStatement="MySql"/>
         </table>
 
         <table schema="" tableName="tb_ruku_detail" domainObjectName="RukuDetail">
-            <generatedKey column="id" sqlStatement="MySql"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table schema="" tableName="tb_spinfo" domainObjectName="SpInfo">
-            <generatedKey column="id" sqlStatement="MySql"/>
         </table>
 
         <table schema="" tableName="tb_khinfo" domainObjectName="KhInfo">
-            <generatedKey column="id" sqlStatement="MySql"/>
         </table>
 
         <table schema="" tableName="tb_kucun" domainObjectName="Kucun">
@@ -101,11 +97,10 @@
         </table>
 
         <table schema="" tableName="tb_sell_main" domainObjectName="Sell">
-            <generatedKey column="sellID" sqlStatement="MySql"/>
         </table>
 
         <table schema="" tableName="tb_sell_detail" domainObjectName="SellDetail">
-            <generatedKey column="ID" sqlStatement="MySql"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>

@@ -106,9 +106,6 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_spinfo (id, spname, jc, 
       cd, dw, gg, bz, 
       ph, pzwh, memo, gysname
@@ -119,12 +116,11 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.SpInfo">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_spinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
+      <if test="id != null">
+        id,
+      </if>
       <if test="spname != null">
         spname,
       </if>
@@ -157,7 +153,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="spname != null">
         #{spname,jdbcType=VARCHAR},
       </if>

@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface SpInfoMapperExt extends SpInfoMapper {
     String selectMaxId();
+
     List<SpInfo> selectExistKucun();
 }

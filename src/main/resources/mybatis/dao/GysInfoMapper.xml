@@ -106,22 +106,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.GysInfo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into tb_gysinfo (name, jc, address, 
-      bianma, tel, fax, lian, 
-      ltel, yh, mail)
-    values (#{name,jdbcType=VARCHAR}, #{jc,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{bianma,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{lian,jdbcType=VARCHAR}, 
-      #{ltel,jdbcType=VARCHAR}, #{yh,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
+    insert into tb_gysinfo (id, name, jc, 
+      address, bianma, tel, 
+      fax, lian, ltel, yh, 
+      mail)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{jc,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{bianma,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{lian,jdbcType=VARCHAR}, #{ltel,jdbcType=VARCHAR}, #{yh,jdbcType=VARCHAR}, 
+      #{mail,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.GysInfo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_gysinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="name != null">
         name,
       </if>
@@ -154,6 +153,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
