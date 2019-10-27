@@ -8,7 +8,7 @@ import java.util.Date;
  * 入库业务接口
  */
 public interface RukuService {
-    RukuVO insertRukuInfo(RukuVO rukuVO);
+    boolean insertRukuInfo(RukuVO rukuVO);
 
     String selectMaxId();
 

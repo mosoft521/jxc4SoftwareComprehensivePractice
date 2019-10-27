@@ -211,7 +211,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 						System.out.println("停止");
 
 						spComboBox.removeAllItems();
-//						spComboBox.addItem(new SpInfo());
+						spComboBox.addItem(new SpInfo());
 						List<SpInfoVO> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
 						System.out.println("select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
 						updateSpComboBox(spInfoList);
@@ -294,8 +294,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 					detailArrayList.add(detail);
 				}
 
-				RukuVO newRukuVO = rukuService.insertRukuInfo(ruku);
-				if (StringUtils.isNotEmpty(newRukuVO.getRkid())) {
+				if (rukuService.insertRukuInfo(ruku)) {
 					JOptionPane.showMessageDialog(JinHuoDan_IFrame.this,
 							"入库成功！");
 					DefaultTableModel dftm = new DefaultTableModel();
@@ -447,7 +446,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 						return ;
 					}
 					spComboBox.removeAllItems();
-//					spComboBox.addItem(new SpInfo());
+					spComboBox.addItem(new SpInfo());
 					List<SpInfoVO> spInfoList = spInfoService.selectByGysName(getGysComboBox().getSelectedItem().toString());
 					System.out.println("更新商品："+"select * from tb_spinfo where gysname='"+getGysComboBox().getSelectedItem()+"'");
 					updateSpComboBox(spInfoList);
@@ -457,7 +456,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 			spComboBox.addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
-					Item info = (Item)spComboBox.getSelectedItem();
+					SpInfo info = (SpInfo)spComboBox.getSelectedItem();
 					if (info != null && info.getId() != null) {
 						updateTable();
 					}
@@ -468,8 +467,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 	}
 
 	protected synchronized void updateTable() {
-		Item item = (Item)spComboBox.getSelectedItem();
-		SpInfo spinfo = spInfoService.getSpInfo(item);
+		SpInfo spinfo = (SpInfo)spComboBox.getSelectedItem();
 		int row = table.getSelectedRow();
 		if(row>=0 && spinfo != null){
 			table.setValueAt(spinfo.getId(),row , 1);
@@ -499,10 +497,7 @@ public class JinHuoDan_IFrame extends JInternalFrame {
 			DefaultComboBoxModel model = (DefaultComboBoxModel) spComboBox.getModel();
 			if (model.getIndexOf(spInfo) < 0 && !list.contains(spInfo.getId()))
 			{
-				Item item = new Item();
-				item.setId(spInfo.getId());
-				item.setName(spInfo.getSpname());
-				spComboBox.addItem(item);
+				spComboBox.addItem(spInfo);
 			}
 		}
 	}

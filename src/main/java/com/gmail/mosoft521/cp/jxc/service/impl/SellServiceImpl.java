@@ -47,8 +47,10 @@ public class SellServiceImpl implements SellService {
         example.setOrderByClause("sellID desc");
         List<Sell> sellList = sellMapperExt.selectByExample(example);
         if(sellList.isEmpty()) {
-            return null;
+            id += "1001";
+            return id;
         } else {
+            //todo:
             return sellList.get(0).getSellid();
         }
     }
