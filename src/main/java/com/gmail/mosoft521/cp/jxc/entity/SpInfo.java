@@ -110,4 +110,8 @@ public class SpInfo {
     public void setGysname(String gysname) {
         this.gysname = gysname == null ? null : gysname.trim();
     }
+
+    public String toString() {
+        return getSpname();
+    }
 }
