@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainFrame extends JFrame {
@@ -31,6 +32,11 @@ public class MainFrame extends JFrame {
 	private JSeparator separator2 = null ;
 
 	private JSeparator separator3 = null;
+
+	//日期格式
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	//时间格式
+	private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public MainFrame(ApplicationContext context){
 		super();
@@ -116,7 +122,7 @@ public class MainFrame extends JFrame {
 			gridconstrain5.insets = new Insets(0,5,0,5);
 			nowDateLabel = new JLabel();
 			Date date = new Date();
-			String dates = date.toString();
+			String dates = dateFormat.format(date);
 			nowDateLabel.setText(dates);
 			statePanel.add(nowDateLabel, gridconstrain5);
 			
