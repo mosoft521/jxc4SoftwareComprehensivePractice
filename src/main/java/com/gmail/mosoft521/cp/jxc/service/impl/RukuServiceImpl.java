@@ -43,7 +43,7 @@ public class RukuServiceImpl implements RukuService {
             rukuDetailMapper.insert(rukuDetail);
             //TODO:操作库存表
             Kucun kucun = kucunMapper.selectByPrimaryKey(rukuDetail.getSpid());
-            if(null==kucun || StringUtils.isEmpty(kucun.getSpname())){
+            if (null == kucun || StringUtils.isEmpty(kucun.getSpname())) {
                 //插入
                 SpInfo spInfo = spInfoMapperExt.selectByPrimaryKey(rukuDetail.getSpid());
                 kucun = new Kucun();
@@ -72,15 +72,17 @@ public class RukuServiceImpl implements RukuService {
         String id = "RK" + dateStr;
         RukuExample example = new RukuExample();
         RukuExample.Criteria criteria = example.createCriteria();
-        criteria.andRkidEqualTo(id + "%");
+        criteria.andRkidLike(id + "%");
         example.setOrderByClause("rkID desc");
-        List<Ruku> sellList = rukuMapperExt.selectByExample(example);
-        if(sellList.isEmpty()) {
+        List<Ruku> rukuList = rukuMapperExt.selectByExample(example);
+        if (rukuList.isEmpty()) {
             id += "1001";
             return id;
         } else {
-            //todo:
-            return sellList.get(0).getRkid();
+            String maxId = rukuList.get(0).getRkid();
+            String str = maxId.substring(id.length());
+            id += (Integer.parseInt(str) + 1);
+            return id;
         }
     }
 }

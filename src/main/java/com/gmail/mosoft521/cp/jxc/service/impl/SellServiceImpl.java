@@ -50,8 +50,10 @@ public class SellServiceImpl implements SellService {
             id += "1001";
             return id;
         } else {
-            //todo:
-            return sellList.get(0).getSellid();
+            String maxId = sellList.get(0).getSellid();
+            String str = maxId.substring(id.length());
+            id += (Integer.parseInt(str) + 1);
+            return id;
         }
     }
 }
