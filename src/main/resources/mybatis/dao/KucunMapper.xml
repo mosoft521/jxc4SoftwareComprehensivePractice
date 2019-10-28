@@ -103,9 +103,6 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gmail.mosoft521.cp.jxc.entity.Kucun">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_kucun (id, spname, jc, 
       gg, bz, dw, dj, 
       kcsl)
@@ -114,12 +111,11 @@
       #{kcsl,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.cp.jxc.entity.Kucun">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into tb_kucun
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      id,
+      <if test="id != null">
+        id,
+      </if>
       <if test="spname != null">
         spname,
       </if>
@@ -143,7 +139,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{id,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="spname != null">
         #{spname,jdbcType=VARCHAR},
       </if>

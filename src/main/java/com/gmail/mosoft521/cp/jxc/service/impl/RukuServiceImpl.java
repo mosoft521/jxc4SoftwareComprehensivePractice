@@ -41,7 +41,7 @@ public class RukuServiceImpl implements RukuService {
         int r = rukuMapperExt.insert(rukuVO);
         for (RukuDetail rukuDetail : rukuVO.getDetailArrayList()) {
             rukuDetailMapper.insert(rukuDetail);
-            //TODO:操作库存表
+            //操作库存表
             Kucun kucun = kucunMapper.selectByPrimaryKey(rukuDetail.getSpid());
             if (null == kucun || StringUtils.isEmpty(kucun.getSpname())) {
                 //插入

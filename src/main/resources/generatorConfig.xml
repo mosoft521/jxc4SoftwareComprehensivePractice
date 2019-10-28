@@ -85,7 +85,6 @@
         </table>
 
         <table schema="" tableName="tb_kucun" domainObjectName="Kucun">
-            <generatedKey column="id" sqlStatement="MySql"/>
         </table>
 
         <table schema="" tableName="tb_userlist" domainObjectName="User">

@@ -5,7 +5,6 @@ import com.gmail.mosoft521.cp.jxc.entity.RukuExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-
 public interface RukuMapper {
     long countByExample(RukuExample example);
 
