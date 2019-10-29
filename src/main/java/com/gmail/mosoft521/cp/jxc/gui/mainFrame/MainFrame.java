@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void initialize() {
-		this.setTitle("长江进销管理系统");
+		this.setTitle("长江公司百货进销存信息管理系统");
 		this.setJMenuBar(getFrameMenuBar());
 		this.setContentPane(getFrameContentPane());
 		this.setBounds(200, 100, 800, 600);
